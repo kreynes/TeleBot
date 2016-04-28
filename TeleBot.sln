@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeleBot", "TeleBot\TeleBot.csproj", "{86889AA6-D33A-4260-8FC4-2B57ED217705}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86889AA6-D33A-4260-8FC4-2B57ED217705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86889AA6-D33A-4260-8FC4-2B57ED217705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86889AA6-D33A-4260-8FC4-2B57ED217705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86889AA6-D33A-4260-8FC4-2B57ED217705}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,23 @@
+﻿using System;
+using Newtonsoft.Json;
+
+namespace TeleBot
+{
+    [JsonObject]
+    public class MessageEntity
+    {
+        [JsonProperty(PropertyName = "type", Required = Required.Always)]
+        [JsonConverter(typeof(MessageEntityTypeJsonConverter))]
+        public MessageEntityType Type { get; internal set; }
+
+        [JsonProperty(PropertyName = "offset", Required = Required.Always)]
+        public int Offset { get; internal set; }
+
+        [JsonProperty(PropertyName = "length", Required = Required.Always)]
+        public int Length { get; internal set; }
+
+        [JsonProperty(PropertyName = "url", Required = Required.Default)]
+        public string Url { get; internal set; }
+    }
+}
+
