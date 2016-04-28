@@ -7,7 +7,7 @@ namespace TeleBot
     public class Voice
     {
         [JsonProperty(PropertyName = "file_id", Required = Required.Always)]
-        public string FileID { get; internal set; }
+        public string FileId { get; internal set; }
 
         [JsonProperty(PropertyName = "duration", Required = Required.Always)]
         public int Duration { get; internal set; }

@@ -7,7 +7,7 @@ namespace TeleBot
     public class Update
     {
         [JsonProperty(PropertyName = "update_id", Required = Required.Always)]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty(PropertyName = "message", Required = Required.Default)]
         public Message Message { get; set; }

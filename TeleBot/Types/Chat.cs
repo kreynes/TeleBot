@@ -7,22 +7,22 @@ namespace TeleBot
     public class Chat
     {
         [JsonProperty(PropertyName = "id", Required = Required.Always)]
-        public int ID { get; internal set; }
+        public int Id { get; internal set; }
 
-        [JsonProperty(PropertyName = "id", Required = Required.Always)]
+        [JsonProperty(PropertyName = "type", Required = Required.Always)]
         [JsonConverter(typeof(ChatTypeEnumConverter))]
         public ChatType Type { get; internal set; }
 
-        [JsonProperty(PropertyName = "id", Required = Required.Default)]
+        [JsonProperty(PropertyName = "title", Required = Required.Default)]
         public string Title { get; internal set; }
 
-        [JsonProperty(PropertyName = "id", Required = Required.Default)]
+        [JsonProperty(PropertyName = "username", Required = Required.Default)]
         public string Username { get; internal set; }
 
-        [JsonProperty(PropertyName = "id", Required = Required.Default)]
+        [JsonProperty(PropertyName = "first_name", Required = Required.Default)]
         public string FirstName { get; internal set; }
 
-        [JsonProperty(PropertyName = "id", Required = Required.Default)]
+        [JsonProperty(PropertyName = "last_name", Required = Required.Default)]
         public string LastName { get; internal set; }
     }
 }
