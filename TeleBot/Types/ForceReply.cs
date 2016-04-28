@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 namespace TeleBot
 {
     [JsonObject]
-    public class ReplyKeyboardHide
+    public class ForceReply
     {
-        [JsonProperty(PropertyName = "hide_keyboard", Required = Required.Always)]
-        public bool HideKeyboard { get; internal set; }
+        [JsonProperty(PropertyName = "force_reply", Required = Required.Always)]
+        public bool Force { get; internal set; }
 
         [JsonProperty(PropertyName = "selective", Required = Required.Default)]
         public bool Selective { get; internal set; }

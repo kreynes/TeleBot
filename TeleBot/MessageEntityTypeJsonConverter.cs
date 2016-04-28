@@ -66,7 +66,7 @@ namespace TeleBot
                     break;
                 case MessageEntityType.Url:
                     writer.WriteValue("url");
-                    break:
+                    break;
                 case MessageEntityType.Email:
                     writer.WriteValue("email");
                     break;

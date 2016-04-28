@@ -60,6 +60,7 @@
     <Compile Include="Types\ReplyKeyboardHide.cs" />
     <Compile Include="Types\InlineKeyboardMarkup.cs" />
     <Compile Include="Types\InlineKeyboardButton.cs" />
+    <Compile Include="Types\ForceReply.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
