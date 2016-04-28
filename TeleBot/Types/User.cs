@@ -6,7 +6,7 @@ namespace TeleBot
     public class User
     {
         [JsonProperty(PropertyName = "id", Required = Required.Always)]
-        public int ID { get; internal set; }
+        public int Id { get; internal set; }
 
         [JsonProperty(PropertyName = "first_name", Required = Required.Always)]
         public string FirstName { get; internal set; }

@@ -7,7 +7,7 @@ namespace TeleBot
     public class Document
     {
         [JsonProperty(PropertyName = "file_id", Required = Required.Always)]
-        public string FileID { get; internal set; }
+        public string FileId { get; internal set; }
 
         [JsonProperty(PropertyName = "thumb", Required = Required.Default)]
         public PhotoSize Thumbnail { get; internal set; }
