@@ -33,11 +33,11 @@ namespace TeleBot
 
         public async Task<Update[]> SendGetUpdates()
         {
-            return await SendPostRequest<Update[]>("getUpdates", new Dictionary<string, object>()
+            return await SendPostRequest<Update[]>("getUpdates", new
             {
-                { "offset", MessageOffset },
-                { "limit", UpdateLimit },
-                { "timeout", PollTimeout }
+                offset = MessageOffset,
+                limit = UpdateLimit,
+                timeeout = PollTimeout
             });
         }
 
@@ -56,21 +56,12 @@ namespace TeleBot
                 throw new ApiRequestException(respObj.Description, respObj.ErrorCode);
             return respObj.Result;
         }
-        async Task<T> SendPostRequest<T>(string method, Dictionary<string, object> parameters = null)
+        async Task<T> SendPostRequest<T>(string method, object value)
         {
             var uri = new Uri($"{baseUrl}{authToken}/{method}");
-            HttpResponseMessage response;
-            using (var form = new MultipartFormDataContent())
-            {
-                foreach (var param in parameters)
-                {
-                    if (param.Value != null)
-                    {
-                        form.Add(GetContent(param));
-                    }
-                }
-                response = await client.PostAsync(uri, form).ConfigureAwait(false);
-            }
+            var json = JsonConvert.SerializeObject(value);
+            var content = new StringContent(json);
+            var response = await client.PostAsync(uri, content);
             Response<T> respObj = null;
             if (response.IsSuccessStatusCode)
             {
@@ -80,23 +71,6 @@ namespace TeleBot
             if (!respObj.Ok)
                 throw new ApiRequestException(respObj.Description, respObj.ErrorCode);
             return respObj.Result;
-        }
-
-        static HttpContent GetContent(object value)
-        {
-            switch (Type.GetTypeCode(value.GetType()))
-            {
-                case TypeCode.String:
-                case TypeCode.Int32:
-                    return new StringContent(value.ToString());
-                case TypeCode.Boolean:
-                    return new StringContent((bool)value ? "true" : "false");
-                default:
-                    return new StringContent(JsonConvert.SerializeObject(value, new JsonSerializerSettings
-                    {
-                        DefaultValueHandling = DefaultValueHandling.Ignore
-                    }));
-            }
         }
     }
 }
