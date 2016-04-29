@@ -4,13 +4,12 @@ using Newtonsoft.Json;
 namespace TeleBot
 {
     [JsonObject]
-    public class ReplyKeyboardHide
+    public class ReplyKeyboardHide : IReplyMarkup
     {
         [JsonProperty(PropertyName = "hide_keyboard", Required = Required.Always)]
-        public bool HideKeyboard { get; internal set; }
-
-        [JsonProperty(PropertyName = "selective", Required = Required.Default)]
-        public bool Selective { get; internal set; }
+        public bool HideKeyboard { get; set; }
+        [JsonProperty(PropertyName = "selective", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public bool Selective { get; set; }
     }
 }
 
