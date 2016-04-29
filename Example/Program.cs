@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using TeleBot;
 
 namespace Example
@@ -11,7 +12,6 @@ namespace Example
             bot = new Bot("token");
             var userbot = bot.SendGetMeAsync().Result;
             Console.WriteLine($"{userbot.FirstName} {userbot.LastName} {userbot.Username} {userbot.Id}");
-            Console.WriteLine(bot.SendGetUpdates().Result);
             Console.ReadLine();
         }
     }

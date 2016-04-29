@@ -64,6 +64,11 @@
     <Compile Include="Bot.cs" />
     <Compile Include="Types\Response.cs" />
     <Compile Include="ApiRequestException.cs" />
+    <Compile Include="ParseMode.cs" />
+    <Compile Include="IReplyMarkup.cs" />
+    <Compile Include="Types\ReplyKeyboardMarkup.cs" />
+    <Compile Include="Extensions\ParseModeEnumConverter.cs" />
+    <Compile Include="MessageParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

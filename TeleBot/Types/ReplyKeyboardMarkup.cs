@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 namespace TeleBot
 {
     [JsonObject]
-    public class InlineKeyboardMarkup : IReplyMarkup
+    public class ReplyKeyboardMarkup : IReplyMarkup
     {
         [JsonProperty(PropertyName = "keyboard", Required = Required.Always)]
-        public KeyboardButton[][] Keyboard { get; set; }
+        public KeyboardButton[] Keyboard { get; set; }
 
         [JsonProperty(PropertyName = "resize_keyboard", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool ResizeKeyboard { get; set; }
@@ -17,6 +17,6 @@ namespace TeleBot
 
         [JsonProperty(PropertyName = "selective", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Selective { get; set; }
-
     }
 }
+
