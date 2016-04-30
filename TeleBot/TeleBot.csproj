@@ -70,6 +70,8 @@
     <Compile Include="Types\ReplyKeyboardMarkup.cs" />
     <Compile Include="Extensions\ParseModeEnumConverter.cs" />
     <Compile Include="MessageParameters.cs" />
+    <Compile Include="Types\InputFile.cs" />
+    <Compile Include="PostRequestType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
