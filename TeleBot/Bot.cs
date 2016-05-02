@@ -46,6 +46,11 @@ namespace TeleBot
 
         public async Task<Message> SendMessageAsync(string chatId, string messageText, ParseMode mode = ParseMode.Default, bool disableLinkPreview = false, bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
+            if (string.IsNullOrWhiteSpace(chatId))
+                throw new ArgumentException("Null or whitespace", nameof(chatId));
+            if (string.IsNullOrWhiteSpace(messageText))
+                throw new ArgumentException("Null or whitespace", nameof(messageText));
+
             return await SendPostRequest<Message>("sendMessage", BuildJsonContent(new MessageParameters
             {
                 ChatId = chatId,
@@ -60,6 +65,13 @@ namespace TeleBot
 
         public async Task<Message> SendForwardMessage(string chatId, string fromChatId, int messageId, bool disableNotification = false)
         {
+            if (string.IsNullOrWhiteSpace(chatId))
+                throw new ArgumentException("Null or whitespace", nameof(chatId));
+            if (string.IsNullOrWhiteSpace(fromChatId))
+                throw new ArgumentException("Null or whitespace", nameof(fromChatId));
+            if (messageId == 0)
+                throw new ArgumentException("Cannot specify default value", nameof(messageId));
+
             return await SendPostRequest<Message>("forwardMessage", BuildJsonContent(new
             {
                 chat_id = chatId,
@@ -71,11 +83,37 @@ namespace TeleBot
 
         public async Task<Message> SendPhoto(string chatId, InputFile photoFile, string caption = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
         {
+            if (string.IsNullOrWhiteSpace(chatId))
+                throw new ArgumentException("Null or whitespace", nameof(chatId));
+            if (photoFile == null)
+                throw new ArgumentNullException(nameof(photoFile));
+
             return await SendPostRequest<Message>("sendPhoto", BuildFormDataContent(new Dictionary<string, object>
             {
                 {"chat_id", chatId},
                 {"photo", photoFile},
                 {"caption", caption},
+                {"disable_notification", disableNotification},
+                {"reply_to_message_id", replyMessageId},
+                {"reply_markup", replyMarukup}
+            }));
+        }
+
+        public async Task<Message> SendAudio(string chatId, InputFile audioFile, int duration = 0, string performer = "", string title = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        {
+            if (string.IsNullOrWhiteSpace(chatId))
+                throw new ArgumentException("Null or whitespace", nameof(chatId));
+            if (audioFile == null)
+                throw new ArgumentNullException(nameof(audioFile));
+            //TODO Add MP3 header check as Telegram Bot API only accepts MP3 file formats for uploading 
+
+            return await SendPostRequest<Message>("sendAudio", BuildFormDataContent(new Dictionary<string, object>
+            {
+                {"chat_id", chatId},
+                {"audio", audioFile},
+                {"duration", duration},
+                {"performer", performer},
+                {"title", title},
                 {"disable_notification", disableNotification},
                 {"reply_to_message_id", replyMessageId},
                 {"reply_markup", replyMarukup}
@@ -92,6 +130,9 @@ namespace TeleBot
 
         HttpContent BuildFormDataContent(Dictionary<string, object> formDataParameters)
         {
+            if (formDataParameters == null)
+                throw new ArgumentNullException(nameof(formDataParameters));
+
             var formData = new MultipartFormDataContent();
             foreach (var param in formDataParameters.Where(x => x.Value != null))
             {
@@ -120,6 +161,9 @@ namespace TeleBot
 
         async Task<T> SendGetRequest<T>(string method)
         {
+            if (string.IsNullOrWhiteSpace(method))
+                throw new ArgumentException("Null or whitespace", nameof(method));
+
             var uri = new Uri($"{baseUrl}{AuthenticationToken}/{method}");
             var response = await client.GetAsync(uri).ConfigureAwait(false);
             Response<T> respObj = null;
@@ -135,7 +179,7 @@ namespace TeleBot
         async Task<T> SendPostRequest<T>(string method, HttpContent content)
         {
             if (string.IsNullOrWhiteSpace(method))
-                throw new ArgumentException("Invalid method input");
+                throw new ArgumentException("Null or whitespace", nameof(method));
             if (content == null)
                 throw new ArgumentNullException(nameof(content));
 

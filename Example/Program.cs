@@ -14,11 +14,7 @@ namespace Example
             var userbot = bot.SendGetMeAsync().Result;
             Console.WriteLine($"{userbot.FirstName} {userbot.LastName} {userbot.Username} {userbot.Id}");
             //var testMsg = bot.SendMessageAsync("-119425511", "Test").Result;
-            var photoMsg = bot.SendPhoto("chatid", new InputFile("file.png", new FileStream(@"/path/to/file/2ueo1w5.png", FileMode.Open))).Result;
-            foreach (PhotoSize photo in photoMsg.Photo)
-            {
-                Console.WriteLine(photo.FileSize);
-            }
+            var photoMsg = bot.SendAudio("chat_id", new InputFile("file_name.mp3", new FileStream(@"/path/to/file_name.mp3", FileMode.Open)), 151, "performer", "title").Result;
             Console.ReadLine();
         }
     }
