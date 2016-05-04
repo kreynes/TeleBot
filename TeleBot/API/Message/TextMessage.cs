@@ -1,31 +1,42 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace TeleBot
 {
-    [JsonObject]
-    class MessageParameters
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class TextMessage
     {
+        public TextMessage(string chatId, string text)
+        {
+            if (string.IsNullOrWhiteSpace(chatId))
+                throw new ArgumentException("Null or whitespace.", nameof(chatId));
+            if (string.IsNullOrWhiteSpace(text))
+                throw new ArgumentException("Null or whitespace.", nameof(text));
+            ChatId = chatId;
+            Text = text;
+        }
+
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]
-        internal string ChatId { get; set; }
+        public string ChatId { get; set; }
 
         [JsonProperty(PropertyName = "text", Required = Required.Always)]
-        internal string Text { get; set; }
+        public string Text { get; set; }
 
         [JsonProperty(PropertyName = "parse_mode", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        internal ParseMode Mode { get; set; }
+        public ParseMode ParseMode { get; set; } = ParseMode.Default;
 
         [JsonProperty(PropertyName = "disable_web_page_preview", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        internal bool DisableWebPagePreview { get; set; }
+        public bool DisableLinkPreview { get; set; } = false;
 
         [JsonProperty(PropertyName = "disable_notification", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        internal bool DisableNotification { get; set; }
+        public bool DisableNotification { get; set; } = false;
 
         [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        internal int MessageReplyId { get; set; }
+        public int ReplyToMessageId { get; set; } = 0;
 
         [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        internal IReplyMarkup ReplyMarkup { get; set; }
-
+        public IReplyMarkup ReplyMarkup { get; set; } = null;
     }
 }
+
