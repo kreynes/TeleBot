@@ -44,6 +44,9 @@ namespace TeleBot
         [JsonProperty(PropertyName = "height", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public int Height { get; set; } = 0;
 
+        [JsonProperty(PropertyName = "caption", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string Caption { get; set; } = "";
+
         [JsonProperty(PropertyName = "disable_notification", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool DisableNotification { get; set; } = false;
 

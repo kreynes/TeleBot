@@ -11,7 +11,7 @@ namespace TeleBot
     {
         const string baseUrl = "https://api.telegram.org/bot";
 
-        readonly HttpClient client;
+        HttpClient client;
 
         public string AuthenticationToken { get; internal set; }
         public int UpdateLimit { get; set; } = 10;
@@ -69,7 +69,8 @@ namespace TeleBot
             return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(message));
         }
 
-        public async Task<Message> SendForwardMessageAsync(string chatId, string fromChatId, int messageId, bool disableNotification = false)
+        public async Task<Message> SendForwardMessageAsync(string chatId, string fromChatId, int messageId,
+                                                           bool disableNotification = false)
         {
             return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(new ForwardMessage(chatId, fromChatId, messageId)
             {
@@ -77,153 +78,162 @@ namespace TeleBot
             }));
         }
 
-        public async Task<Message> SendPhotoAsync(string chatId, InputFile photoFile, string caption = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        public async Task<Message> SendPhotoAsync(PhotoMessage message)
         {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace", nameof(chatId));
-            if (photoFile == null)
-                throw new ArgumentNullException(nameof(photoFile));
+            return await SendPostRequest<Message>("sendPhoto", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+        }
 
-            return await SendPostRequest<Message>("sendPhoto", HttpContentBuilder.BuildMultipartData(new Dictionary<string, object>
+        public async Task<Message> SendPhotoAsync(string chatId, InputFile photoFile, string caption = "",
+                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        {
+            return await SendPostRequest<Message>("sendPhoto", HttpContentBuilder.BuildMultipartData(new PhotoMessage(chatId, photoFile)
             {
-                {"chat_id", chatId},
-                {"photo", photoFile},
-                {"caption", caption},
-                {"disable_notification", disableNotification},
-                {"reply_to_message_id", replyMessageId},
-                {"reply_markup", replyMarukup}
+                Caption = caption,
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarukup
+            }.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendAudioAsync(AudioMessage message)
+        {
+            return await SendPostRequest<Message>("sendAudio", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendAudioAsync(string chatId, InputFile audioFile, int duration = 0,
+                                                  string performer = "", string title = "", bool disableNotification = false,
+                                                  int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        {
+            return await SendPostRequest<Message>("sendAudio", HttpContentBuilder.BuildMultipartData(new AudioMessage(chatId, audioFile)
+            {
+                Duration = duration,
+                Performer = performer,
+                Title = title,
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarukup
+            }.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendDocumentAsync(DocumentMessage message)
+        {
+            return await SendPostRequest<Message>("sendDocument", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendDocumentAsync(string chatId, InputFile documentFile, string caption = "",
+                                                     bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        {
+
+            return await SendPostRequest<Message>("sendDocument", HttpContentBuilder.BuildMultipartData(new DocumentMessage(chatId, documentFile)
+            {
+                Caption = caption,
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarukup
+            }.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendStickerAsync(StickerMessage message)
+        {
+            return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendStickerAsync(string chatId, InputFile stickerFile, bool disableNotification = false,
+                                                    int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        {
+            return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(new StickerMessage(chatId, stickerFile)
+            {
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarukup
+            }.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendVideoAsync(VideoMessage message)
+        {
+            return await SendPostRequest<Message>("sendVideo", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendVideoAsync(string chatId, InputFile videoFile, int duration = 0,
+                                                  int width = 0, int height = 0, string caption = "",
+                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        {
+            return await SendPostRequest<Message>("sendVideo", HttpContentBuilder.BuildMultipartData(new VideoMessage(chatId, videoFile)
+            {
+                Duration = duration,
+                Width = width,
+                Height = height,
+                Caption = caption,
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarukup
+            }.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendVoiceAsync(VoiceMessage message)
+        {
+            return await SendPostRequest<Message>("sendVoice", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendVoiceAsync(string chatId, InputFile voiceFile, int duration = 0,
+                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        {
+            return await SendPostRequest<Message>("sendVoice", HttpContentBuilder.BuildMultipartData(new VoiceMessage(chatId, voiceFile)
+            {
+                Duration = duration,
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarukup
+            }.ToParameterDictionary()));
+        }
+
+        public async Task<Message> SendLocationAsync(LocationMessage message)
+        {
+            return await SendPostRequest<Message>("sendLocation", HttpContentBuilder.BuildJsonContent(message));
+        }
+
+        public async Task<Message> SendLocationAsync(string chatId, float latitudeValue, float longitudeValue,
+                                                     bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        {
+            return await SendPostRequest<Message>("sendLocation", HttpContentBuilder.BuildJsonContent(new LocationMessage(chatId, latitudeValue, longitudeValue)
+            {
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarukup
             }));
         }
 
-        public async Task<Message> SendAudioAsync(string chatId, InputFile audioFile, int duration = 0, string performer = "", string title = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        public async Task<Message> SendVenueAsync(VenueMessage message)
         {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace", nameof(chatId));
-            if (audioFile == null)
-                throw new ArgumentNullException(nameof(audioFile));
-            //TODO Add MP3 header check as Telegram Bot API only accepts MP3 file formats for uploading 
+            return await SendPostRequest<Message>("sendVenue", HttpContentBuilder.BuildJsonContent(message));
+        }
 
-            return await SendPostRequest<Message>("sendAudio", HttpContentBuilder.BuildMultipartData(new Dictionary<string, object>
+        public async Task<Message> SendVenueAsync(string chatId, float latitude, float longitude,
+                                                  string title, string address, string foursquareId = "",
+                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        {
+            return await SendPostRequest<Message>("sendVenue", HttpContentBuilder.BuildJsonContent(new VenueMessage(chatId, latitude, longitude, title, address)
             {
-                {"chat_id", chatId},
-                {"audio", audioFile},
-                {"duration", duration},
-                {"performer", performer},
-                {"title", title},
-                {"disable_notification", disableNotification},
-                {"reply_to_message_id", replyMessageId},
-                {"reply_markup", replyMarukup}
+                FoursquareId = foursquareId,
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarkup
             }));
         }
 
-        public async Task<Message> SendDocumentAsync(string chatId, InputFile documentFile, string caption = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        public async Task<Message> SendContactAsync(ContactMessage message)
         {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace", nameof(chatId));
-            if (documentFile == null)
-                throw new ArgumentNullException(nameof(documentFile));
-
-            return await SendPostRequest<Message>("sendDocument", HttpContentBuilder.BuildMultipartData(new Dictionary<string, object>
-            {
-                {"chat_id", chatId},
-                {"document", documentFile},
-                {"caption", caption},
-                {"disable_notification", disableNotification},
-                {"reply_to_message_id", replyMessageId},
-                {"reply_markup", replyMarukup}
-            }));
-        }
-
-        public async Task<Message> SendStickerAsync(string chatId, InputFile stickerFile, bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
-        {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace", nameof(chatId));
-            if (stickerFile == null)
-                throw new ArgumentNullException(nameof(stickerFile));
-
-            return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(new Dictionary<string, object>
-            {
-                {"chat_id", chatId},
-                {"sticker", stickerFile},
-                {"disable_notification", disableNotification},
-                {"reply_to_message_id", replyMessageId},
-                {"reply_markup", replyMarukup}
-            }));
-        }
-
-        public async Task<Message> SendVideoAsync(string chatId, InputFile videoFile, int duration = 0, int width = 0, int height = 0, string caption = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
-        {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace", nameof(chatId));
-            if (videoFile == null)
-                throw new ArgumentNullException(nameof(videoFile));
-
-            return await SendPostRequest<Message>("sendVideo", HttpContentBuilder.BuildMultipartData(new Dictionary<string, object>
-            {
-                {"chat_id", chatId},
-                {"video", videoFile},
-                {"duration", duration},
-                {"width", width},
-                {"height", height},
-                {"caption", caption},
-                {"disable_notification", disableNotification},
-                {"reply_to_message_id", replyMessageId},
-                {"reply_markup", replyMarukup}
-            }));
-        }
-
-        public async Task<Message> SendVoiceAsync(string chatId, InputFile voiceFile, int duration = 0, bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
-        {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace", nameof(chatId));
-            if (voiceFile == null)
-                throw new ArgumentNullException(nameof(voiceFile));
-
-            return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(new Dictionary<string, object>
-            {
-                {"chat_id", chatId},
-                {"voice", voiceFile},
-                {"duration", duration},
-                {"disable_notification", disableNotification},
-                {"reply_to_message_id", replyMessageId},
-                {"reply_markup", replyMarukup}
-            }));
-        }
-
-        public async Task<Message> SendLocationAsync(string chatId, float latitudeValue, float longitudeValue, bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
-        {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace", nameof(chatId));
-
-            return await SendPostRequest<Message>("sendLocation", HttpContentBuilder.BuildJsonContent(new
-            {
-                chat_id = chatId,
-                latitude = latitudeValue,
-                longitude = longitudeValue,
-                disable_notification = disableNotification,
-                reply_to_message_id = replyMessageId,
-                reply_markup = replyMarukup
-            }));
+            return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(message));
         }
 
         public async Task<Message> SendContactAsync(string chatId, string phoneNumber, string firstName, string lastName = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
         {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace", nameof(chatId));
-            if (string.IsNullOrWhiteSpace(phoneNumber))
-                throw new ArgumentException("Null or whitespace", nameof(phoneNumber));
-            if (string.IsNullOrWhiteSpace(firstName))
-                throw new ArgumentException("Null or whitespace", nameof(firstName));
-
-            return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(new
+            return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(new ContactMessage(chatId, phoneNumber, firstName)
             {
-                chat_id = chatId,
-                phone_number = phoneNumber,
-                first_name = firstName,
-                last_name = lastName,
-                disable_notification = disableNotification,
-                reply_to_message_id = replyMessageId,
-                reply_markup = replyMarukup
+                LastName = lastName,
+                DisableNotification = disableNotification,
+                ReplyToMessageId = replyMessageId,
+                ReplyMarkup = replyMarukup
             }));
         }
 
