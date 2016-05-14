@@ -4,6 +4,11 @@ os: linux
 solution: TeleBot.sln
 sudo: false
 
+branches:
+  only:
+    - master
+    - develop
+
 script:
     - xbuild /t:Rebuild /p:Configuration=Release TeleBot.sln
 
