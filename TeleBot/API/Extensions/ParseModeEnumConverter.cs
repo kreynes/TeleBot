@@ -24,7 +24,7 @@ namespace TeleBot.API.Extensions
                 var type = (ParseMode)value;
                 writer.WriteValue(type.ToString());
             }
-            else return;
+            
         }
     }
 }
