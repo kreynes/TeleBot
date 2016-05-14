@@ -12,6 +12,8 @@ namespace TeleBot.API.Message
             if (string.IsNullOrWhiteSpace(chatId))
                 throw new ArgumentException("Null or whitespace.", nameof(chatId));
             ChatId = chatId;
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]
@@ -21,7 +23,7 @@ namespace TeleBot.API.Message
         public float Latitude { get; set; }
 
         [JsonProperty(PropertyName = "longitude", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string Longitude { get; set; }
+        public float Longitude { get; set; }
 
         [JsonProperty(PropertyName = "disable_notification", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool DisableNotification { get; set; } = false;
