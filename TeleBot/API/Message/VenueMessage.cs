@@ -5,7 +5,7 @@ using TeleBot.API.Types;
 namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class VenueMessage
+    public class VenueMessage : IMessageWithReply
     {
         public VenueMessage(string chatId, float latitude, float longitude, string title, string address)
         {

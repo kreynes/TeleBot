@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,6 +35,8 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Message\IMessage.cs" />
+    <Compile Include="API\Message\IMessageWithReply.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bot.cs" />
     <Compile Include="API\Types\Audio.cs" />
@@ -87,12 +89,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="API\" />
-    <Folder Include="API\Types\" />
-    <Folder Include="API\Message\" />
-    <Folder Include="API\Extensions\" />
-    <Folder Include="API\Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

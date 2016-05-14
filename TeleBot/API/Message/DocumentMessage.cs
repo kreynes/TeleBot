@@ -5,7 +5,7 @@ using TeleBot.API.Types;
 namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DocumentMessage
+    public class DocumentMessage : IMessageWithReply
     {
         public DocumentMessage(string chatId, InputFile document)
         {
