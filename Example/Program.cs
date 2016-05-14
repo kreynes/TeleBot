@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Net.Http;
+using System.Threading.Tasks;
 using TeleBot;
 
 namespace Example
@@ -9,9 +9,18 @@ namespace Example
         public static Bot bot;
         public static void Main()
         {
+            InitializeBot().Wait();
+        }
+
+        public static async Task InitializeBot()
+        {
             bot = new Bot("token");
-            var userbot = bot.SendGetMeAsync().Result;
+            var userbot = await bot.SendGetMeAsync();
             Console.WriteLine($"{userbot.FirstName} {userbot.LastName} {userbot.Username} {userbot.Id}");
+            await bot.SendMessageAsync(new TextMessage("chatid", "testtext"));
+            //or
+            await bot.SendMessageAsync("chatid", "testtext");
+
             Console.ReadLine();
         }
     }

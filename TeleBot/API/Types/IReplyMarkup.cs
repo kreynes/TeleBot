@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace TeleBot
 {
     public interface IReplyMarkup
@@ -6,4 +7,3 @@ namespace TeleBot
         bool Selective { get; set; }
     }
 }
-
