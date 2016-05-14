@@ -1,0 +1,17 @@
+language: csharp
+mono: weekly
+os: linux
+solution: TeleBot.sln
+sudo: false
+
+script:
+    - xbuild /t:Rebuild /p:Configuration=Release TeleBot.sln
+
+notifications:
+    email: false
+    irc:
+        channels:
+            - "irc.fyrechat.net#vana-commits"
+        skip_join: true
+        template:
+            - "%{repository}#%{build_number} (%{branch} - %{commit} - %{author}): %{message}"
