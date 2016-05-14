@@ -14,6 +14,9 @@ namespace TeleBot.API.Message
             if (string.IsNullOrWhiteSpace(address))
                 throw new ArgumentException("Null or whitespace", nameof(address));
             ChatId = chatId;
+            Latitude = latitude;
+            Longitude = longitude;
+            Title = title;
         }
 
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]

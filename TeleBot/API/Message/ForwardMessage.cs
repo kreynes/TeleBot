@@ -14,6 +14,7 @@ namespace TeleBot.API.Message
                 throw new ArgumentException("Null or whitespace.", nameof(fromChatId));
             ChatId = chatId;
             FromChatId = fromChatId;
+            MessageId = messageId;
         }
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]
         public string ChatId { get; set; }

@@ -66,7 +66,7 @@ namespace TeleBot
 
         public async Task<Message> SendMessageAsync(TextMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendMessage", HttpContentBuilder.BuildJsonContent(message));
+            return await SendPostRequest<Message>("sendMessage", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
         public async Task<Message> SendMessageAsync(string chatId, string messageText, ParseMode mode = ParseMode.Default,
