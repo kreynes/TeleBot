@@ -1,10 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ForwardMessage
+    public class ForwardMessage : IMessage
     {
         public ForwardMessage(string chatId, string fromChatId, int messageId)
         {

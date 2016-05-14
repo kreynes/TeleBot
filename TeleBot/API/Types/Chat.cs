@@ -1,7 +1,8 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using TeleBot.API.Enums;
+using TeleBot.API.Extensions;
 
-namespace TeleBot
+namespace TeleBot.API.Types
 {
     [JsonObject]
     public class Chat

@@ -1,5 +1,6 @@
 ﻿using System;
-namespace TeleBot
+
+namespace TeleBot.API
 {
     public class ApiRequestException : Exception
     {

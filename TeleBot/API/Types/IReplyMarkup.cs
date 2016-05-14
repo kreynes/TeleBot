@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TeleBot
+﻿namespace TeleBot.API.Types
 {
     public interface IReplyMarkup
     {

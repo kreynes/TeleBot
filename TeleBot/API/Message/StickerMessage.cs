@@ -1,10 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
+using TeleBot.API.Types;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class StickerMessage
+    public class StickerMessage : IMessageWithReply
     {
         public StickerMessage(string chatId, InputFile sticker)
         {

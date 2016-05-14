@@ -1,6 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
-namespace TeleBot
+﻿using Newtonsoft.Json;
+
+namespace TeleBot.API.Types
 {
     [JsonObject]
     public class Response<T>

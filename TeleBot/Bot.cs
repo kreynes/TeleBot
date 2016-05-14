@@ -3,6 +3,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Threading;
+using TeleBot.API;
+using TeleBot.API.Enums;
+using TeleBot.API.Extensions;
+using TeleBot.API.Message;
+using TeleBot.API.Types;
 
 namespace TeleBot
 {
@@ -103,14 +108,14 @@ namespace TeleBot
         }
 
         public async Task<Message> SendPhotoAsync(string chatId, InputFile photoFile, string caption = "",
-                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
             return await SendPostRequest<Message>("sendPhoto", HttpContentBuilder.BuildMultipartData(new PhotoMessage(chatId, photoFile)
             {
                 Caption = caption,
                 DisableNotification = disableNotification,
                 ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarukup
+                ReplyMarkup = replyMarkup
             }.ToParameterDictionary()));
         }
 
@@ -121,7 +126,7 @@ namespace TeleBot
 
         public async Task<Message> SendAudioAsync(string chatId, InputFile audioFile, int duration = 0,
                                                   string performer = "", string title = "", bool disableNotification = false,
-                                                  int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+                                                  int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
             return await SendPostRequest<Message>("sendAudio", HttpContentBuilder.BuildMultipartData(new AudioMessage(chatId, audioFile)
             {
@@ -130,7 +135,7 @@ namespace TeleBot
                 Title = title,
                 DisableNotification = disableNotification,
                 ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarukup
+                ReplyMarkup = replyMarkup
             }.ToParameterDictionary()));
         }
 
@@ -140,7 +145,7 @@ namespace TeleBot
         }
 
         public async Task<Message> SendDocumentAsync(string chatId, InputFile documentFile, string caption = "",
-                                                     bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+                                                     bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
 
             return await SendPostRequest<Message>("sendDocument", HttpContentBuilder.BuildMultipartData(new DocumentMessage(chatId, documentFile)
@@ -148,7 +153,7 @@ namespace TeleBot
                 Caption = caption,
                 DisableNotification = disableNotification,
                 ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarukup
+                ReplyMarkup = replyMarkup
             }.ToParameterDictionary()));
         }
 
@@ -158,13 +163,13 @@ namespace TeleBot
         }
 
         public async Task<Message> SendStickerAsync(string chatId, InputFile stickerFile, bool disableNotification = false,
-                                                    int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+                                                    int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
             return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(new StickerMessage(chatId, stickerFile)
             {
                 DisableNotification = disableNotification,
                 ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarukup
+                ReplyMarkup = replyMarkup
             }.ToParameterDictionary()));
         }
 
@@ -175,7 +180,7 @@ namespace TeleBot
 
         public async Task<Message> SendVideoAsync(string chatId, InputFile videoFile, int duration = 0,
                                                   int width = 0, int height = 0, string caption = "",
-                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
             return await SendPostRequest<Message>("sendVideo", HttpContentBuilder.BuildMultipartData(new VideoMessage(chatId, videoFile)
             {
@@ -185,7 +190,7 @@ namespace TeleBot
                 Caption = caption,
                 DisableNotification = disableNotification,
                 ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarukup
+                ReplyMarkup = replyMarkup
             }.ToParameterDictionary()));
         }
 
@@ -195,14 +200,14 @@ namespace TeleBot
         }
 
         public async Task<Message> SendVoiceAsync(string chatId, InputFile voiceFile, int duration = 0,
-                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
             return await SendPostRequest<Message>("sendVoice", HttpContentBuilder.BuildMultipartData(new VoiceMessage(chatId, voiceFile)
             {
                 Duration = duration,
                 DisableNotification = disableNotification,
                 ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarukup
+                ReplyMarkup = replyMarkup
             }.ToParameterDictionary()));
         }
 
@@ -212,13 +217,13 @@ namespace TeleBot
         }
 
         public async Task<Message> SendLocationAsync(string chatId, float latitudeValue, float longitudeValue,
-                                                     bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+                                                     bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
             return await SendPostRequest<Message>("sendLocation", HttpContentBuilder.BuildJsonContent(new LocationMessage(chatId, latitudeValue, longitudeValue)
             {
                 DisableNotification = disableNotification,
                 ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarukup
+                ReplyMarkup = replyMarkup
             }));
         }
 
@@ -245,14 +250,14 @@ namespace TeleBot
             return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(message));
         }
 
-        public async Task<Message> SendContactAsync(string chatId, string phoneNumber, string firstName, string lastName = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarukup = null)
+        public async Task<Message> SendContactAsync(string chatId, string phoneNumber, string firstName, string lastName = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
         {
             return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(new ContactMessage(chatId, phoneNumber, firstName)
             {
                 LastName = lastName,
                 DisableNotification = disableNotification,
                 ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarukup
+                ReplyMarkup = replyMarkup
             }));
         }
 

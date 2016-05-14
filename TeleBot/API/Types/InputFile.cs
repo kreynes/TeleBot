@@ -1,7 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
-namespace TeleBot
+namespace TeleBot.API.Types
 {
     public class InputFile
     {

@@ -1,10 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
+using TeleBot.API.Types;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class VoiceMessage
+    public class VoiceMessage : IMessageWithReply
     {
         public VoiceMessage(string chatId, InputFile voice)
         {
