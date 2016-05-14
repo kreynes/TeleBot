@@ -1,7 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
+using TeleBot.API.Enums;
 
-namespace TeleBot
+namespace TeleBot.API.Extensions
 {
     public class MessageEntityTypeJsonConverter : JsonConverter
     {

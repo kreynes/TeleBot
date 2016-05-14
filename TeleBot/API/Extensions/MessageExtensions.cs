@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TeleBot.API.Message;
 
-namespace TeleBot
+namespace TeleBot.API.Extensions
 {
     public static class MessageExtensions
     {

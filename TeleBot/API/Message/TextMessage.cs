@@ -1,8 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
-using System.Collections.Generic;
+using TeleBot.API.Enums;
+using TeleBot.API.Types;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class TextMessage

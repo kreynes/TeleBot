@@ -3,6 +3,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Threading;
+using TeleBot.API;
+using TeleBot.API.Enums;
+using TeleBot.API.Extensions;
+using TeleBot.API.Message;
+using TeleBot.API.Types;
 
 namespace TeleBot
 {
