@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Linq;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace TeleBot
 {
@@ -32,20 +31,35 @@ namespace TeleBot
 
         public async Task<User> SendGetMeAsync()
         {
-            return await SendGetRequest<User>("getMe");
+            return await SendGetMeAsync(CancellationToken.None);
+        }
+
+        public async Task<User> SendGetMeAsync(CancellationToken cancellationToken)
+        {
+            return await SendGetRequest<User>("getMe", cancellationToken);
         }
 
         public async Task<Update[]> SendGetUpdatesAsync()
+        {
+            return await SendGetUpdatesAsync(CancellationToken.None);
+        }
+
+        public async Task<Update[]> SendGetUpdatesAsync(CancellationToken cancellationToken)
         {
             return await SendPostRequest<Update[]>("getUpdates", HttpContentBuilder.BuildJsonContent(new
             {
                 offset = MessageOffset,
                 limit = UpdateLimit,
                 timeout = PollTimeout
-            }));
+            }), cancellationToken);
         }
 
         public async Task<Message> SendMessageAsync(TextMessage message)
+        {
+            return await SendMessageAsync(message, CancellationToken.None);
+        }
+
+        public async Task<Message> SendMessageAsync(TextMessage message, CancellationToken cancellationToken)
         {
             return await SendPostRequest<Message>("sendMessage", HttpContentBuilder.BuildJsonContent(message));
         }
@@ -66,7 +80,12 @@ namespace TeleBot
 
         public async Task<Message> SendForwardMessageAsync(ForwardMessage message)
         {
-            return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(message));
+            return await SendForwardMessageAsync(message, CancellationToken.None);
+        }
+
+        public async Task<Message> SendForwardMessageAsync(ForwardMessage message, CancellationToken cancellationToken)
+        {
+            return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
         public async Task<Message> SendForwardMessageAsync(string chatId, string fromChatId, int messageId,
@@ -74,7 +93,7 @@ namespace TeleBot
         {
             return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(new ForwardMessage(chatId, fromChatId, messageId)
             {
-                DisableNotification = disableNotification,
+                DisableNotification = disableNotification
             }));
         }
 
@@ -239,11 +258,16 @@ namespace TeleBot
 
         async Task<T> SendGetRequest<T>(string method)
         {
+            return await SendGetRequest<T>(method, CancellationToken.None);
+        }
+
+        async Task<T> SendGetRequest<T>(string method, CancellationToken cancellationToken)
+        {
             if (string.IsNullOrWhiteSpace(method))
                 throw new ArgumentException("Null or whitespace", nameof(method));
 
             var uri = new Uri($"{baseUrl}{AuthenticationToken}/{method}");
-            var response = await client.GetAsync(uri);
+            var response = await client.GetAsync(uri, cancellationToken);
             Response<T> respObj = null;
             if (response.IsSuccessStatusCode)
             {
@@ -257,13 +281,18 @@ namespace TeleBot
 
         async Task<T> SendPostRequest<T>(string method, HttpContent content)
         {
+            return await SendPostRequest<T>(method, content, CancellationToken.None);
+        }
+
+        async Task<T> SendPostRequest<T>(string method, HttpContent content, CancellationToken cancellationToken)
+        {
             if (string.IsNullOrWhiteSpace(method))
                 throw new ArgumentException("Null or whitespace", nameof(method));
             if (content == null)
                 throw new ArgumentNullException(nameof(content));
 
             var uri = $"{baseUrl}{AuthenticationToken}/{method}";
-            var response = await client.PostAsync(uri, content);
+            var response = await client.PostAsync(uri, content, cancellationToken);
             Response<T> respObj = null;
             string responseString = await response.Content.ReadAsStringAsync();
             respObj = JsonConvert.DeserializeObject<Response<T>>(responseString);
