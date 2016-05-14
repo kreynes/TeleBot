@@ -7,7 +7,7 @@ namespace TeleBot.API
 
         public int ErrorCode { get; internal set; }
 
-        public ApiRequestException(string message)
+        public ApiRequestException(string message) : base(message)
         {
         }
 
