@@ -19,4 +19,5 @@ notifications:
             - "irc.fyrechat.net#vana-commits"
         skip_join: true
         template:
-            - "%{repository}#%{build_number} (%{branch} - %{commit} - %{author}): %{message}"
+            - "%{repository_slug} Build #%{build_number} (%{branch} - %{commit} - %{author}): %{message}"
+            - "Commit: %{commit_message}"
