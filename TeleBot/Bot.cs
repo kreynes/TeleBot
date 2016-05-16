@@ -11,11 +11,13 @@ using TeleBot.API.Types;
 
 namespace TeleBot
 {
-    public class Bot
+    public class Bot : IDisposable
     {
         const string baseUrl = "https://api.telegram.org/bot";
 
         HttpClient client;
+
+        private bool disposedValue = false;
 
         public string AuthenticationToken { get; internal set; }
         public int UpdateLimit { get; set; } = 10;
@@ -201,6 +203,25 @@ namespace TeleBot
             if (!respObj.Ok)
                 throw new ApiRequestException(respObj.Description, respObj.ErrorCode);
             return respObj.Result;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    client.Dispose();
+                    client = null;
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
         }
     }
 }
