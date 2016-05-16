@@ -22,7 +22,6 @@ namespace TeleBot
         public int PollTimeout { get; set; } = 0;
         public int MessageOffset { get; set; } = 0;
 
-
         public Bot(string authenticationToken)
         {
             if (string.IsNullOrWhiteSpace(authenticationToken))
@@ -31,8 +30,6 @@ namespace TeleBot
             AuthenticationToken = authenticationToken;
             client = new HttpClient();
         }
-
-
 
         public async Task<User> SendGetMeAsync()
         {
@@ -169,11 +166,6 @@ namespace TeleBot
             return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
-        async Task<T> SendGetRequest<T>(string method)
-        {
-            return await SendGetRequest<T>(method, CancellationToken.None);
-        }
-
         async Task<T> SendGetRequest<T>(string method, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(method))
@@ -190,11 +182,6 @@ namespace TeleBot
             if (!respObj.Ok)
                 throw new ApiRequestException(respObj.Description, respObj.ErrorCode);
             return respObj.Result;
-        }
-
-        async Task<T> SendPostRequest<T>(string method, HttpContent content)
-        {
-            return await SendPostRequest<T>(method, content, CancellationToken.None);
         }
 
         async Task<T> SendPostRequest<T>(string method, HttpContent content, CancellationToken cancellationToken)
