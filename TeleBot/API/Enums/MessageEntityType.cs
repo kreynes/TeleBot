@@ -1,5 +1,4 @@
-﻿using System;
-namespace TeleBot
+﻿namespace TeleBot.API.Enums
 {
     public enum MessageEntityType
     {

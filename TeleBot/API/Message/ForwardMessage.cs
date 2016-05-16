@@ -1,10 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ForwardMessage
+    public class ForwardMessage : IMessage
     {
         public ForwardMessage(string chatId, string fromChatId, int messageId)
         {
@@ -14,6 +14,7 @@ namespace TeleBot
                 throw new ArgumentException("Null or whitespace.", nameof(fromChatId));
             ChatId = chatId;
             FromChatId = fromChatId;
+            MessageId = messageId;
         }
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]
         public string ChatId { get; set; }

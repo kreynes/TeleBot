@@ -1,10 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
+using TeleBot.API.Types;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class VenueMessage
+    public class VenueMessage : IMessageWithReply
     {
         public VenueMessage(string chatId, float latitude, float longitude, string title, string address)
         {
@@ -13,6 +14,9 @@ namespace TeleBot
             if (string.IsNullOrWhiteSpace(address))
                 throw new ArgumentException("Null or whitespace", nameof(address));
             ChatId = chatId;
+            Latitude = latitude;
+            Longitude = longitude;
+            Title = title;
         }
 
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]

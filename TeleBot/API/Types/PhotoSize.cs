@@ -1,7 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Types
 {
     [JsonObject]
     public class PhotoSize

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using TeleBot;
+using TeleBot.API.Message;
 
 namespace Example
 {
@@ -18,8 +19,6 @@ namespace Example
             var userbot = await bot.SendGetMeAsync();
             Console.WriteLine($"{userbot.FirstName} {userbot.LastName} {userbot.Username} {userbot.Id}");
             await bot.SendMessageAsync(new TextMessage("chatid", "testtext"));
-            //or
-            await bot.SendMessageAsync("chatid", "testtext");
 
             Console.ReadLine();
         }

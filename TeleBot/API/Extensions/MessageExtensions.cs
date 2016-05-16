@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TeleBot.API.Message;
 
-namespace TeleBot
+namespace TeleBot.API.Extensions
 {
     public static class MessageExtensions
     {
@@ -10,7 +10,7 @@ namespace TeleBot
             return new Dictionary<string, object>
             {
                 {"chat_id", message.ChatId},
-                {"photo", message.Photo == null ? (object)message.FileId : message.Photo},
+                {"photo", message.Photo ?? (object)message.FileId},
                 {"caption", message.Caption},
                 {"disable_notification", message.DisableNotification},
                 {"reply_to_message_id", message.ReplyToMessageId},
@@ -23,7 +23,7 @@ namespace TeleBot
             return new Dictionary<string, object>
             {
                 {"chat_id", message.ChatId},
-                {"audio", message.Audio == null ? (object)message.FileId : message.Audio},
+                {"audio", message.Audio ?? (object)message.FileId},
                 {"duration", message.Duration},
                 {"performer", message.Performer},
                 {"title", message.Title},
@@ -38,7 +38,7 @@ namespace TeleBot
             return new Dictionary<string, object>
             {
                 {"chat_id", message.ChatId},
-                {"document", message.Document == null ? (object)message.FileId : message.Document},
+                {"document", message.Document ?? (object)message.FileId},
                 {"caption", message.Caption},
                 {"disable_notification", message.DisableNotification},
                 {"reply_to_message_id", message.ReplyToMessageId},
@@ -51,7 +51,7 @@ namespace TeleBot
             return new Dictionary<string, object>
             {
                 {"chat_id", message.ChatId},
-                {"sticker", message.Sticker == null ? (object)message.FileId : message.Sticker},
+                {"sticker", message.Sticker ?? (object)message.FileId},
                 {"disable_notification", message.DisableNotification},
                 {"reply_to_message_id", message.ReplyToMessageId},
                 {"reply_markup", message.ReplyMarkup}

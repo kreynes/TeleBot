@@ -1,6 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
-namespace TeleBot
+using TeleBot.API.Enums;
+
+namespace TeleBot.API.Extensions
 {
     public class ParseModeEnumConverter : JsonConverter
     {
@@ -22,7 +24,7 @@ namespace TeleBot
                 var type = (ParseMode)value;
                 writer.WriteValue(type.ToString());
             }
-            else return;
+            
         }
     }
 }
