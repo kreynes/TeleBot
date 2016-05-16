@@ -3,8 +3,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Threading;
+using System.Timers;
 using TeleBot.API;
-using TeleBot.API.Enums;
 using TeleBot.API.Extensions;
 using TeleBot.API.Message;
 using TeleBot.API.Types;
@@ -18,6 +18,7 @@ namespace TeleBot
         HttpClient client;
 
         private bool disposedValue = false;
+        private System.Timers.Timer pollingTimer;
 
         public string AuthenticationToken { get; internal set; }
         public int UpdateLimit { get; set; } = 10;
@@ -31,6 +32,17 @@ namespace TeleBot
 
             AuthenticationToken = authenticationToken;
             client = new HttpClient();
+            pollingTimer = new System.Timers.Timer(PollTimeout);
+            pollingTimer.Elapsed += PollingTimer_Elapsed;
+        }
+
+        async void PollingTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            var updates = await SendGetUpdatesAsync();
+            foreach (var update in updates)
+            {
+                MessageOffset = update.Id + 1;
+            }
         }
 
         public async Task<User> SendGetMeAsync()
@@ -213,6 +225,8 @@ namespace TeleBot
                 {
                     client.Dispose();
                     client = null;
+                    pollingTimer.Dispose();
+                    pollingTimer = null;
                 }
 
                 disposedValue = true;
