@@ -69,20 +69,6 @@ namespace TeleBot
             return await SendPostRequest<Message>("sendMessage", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
-        public async Task<Message> SendMessageAsync(string chatId, string messageText, ParseMode mode = ParseMode.Default,
-                                                    bool disableLinkPreview = false, bool disableNotification = false, int replyMessageId = 0,
-                                                    IReplyMarkup replyMarkup = null)
-        {
-            return await SendPostRequest<Message>("sendMessage", HttpContentBuilder.BuildJsonContent(new TextMessage(chatId, messageText)
-            {
-                ParseMode = mode,
-                DisableLinkPreview = disableLinkPreview,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }));
-        }
-
         public async Task<Message> SendForwardMessageAsync(ForwardMessage message)
         {
             return await SendForwardMessageAsync(message, CancellationToken.None);
@@ -93,172 +79,94 @@ namespace TeleBot
             return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
-        public async Task<Message> SendForwardMessageAsync(string chatId, string fromChatId, int messageId,
-                                                           bool disableNotification = false)
-        {
-            return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(new ForwardMessage(chatId, fromChatId, messageId)
-            {
-                DisableNotification = disableNotification
-            }));
-        }
-
         public async Task<Message> SendPhotoAsync(PhotoMessage message)
         {
-            return await SendPostRequest<Message>("sendPhoto", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+            return await SendPhotoAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendPhotoAsync(string chatId, InputFile photoFile, string caption = "",
-                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendPhotoAsync(PhotoMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendPhoto", HttpContentBuilder.BuildMultipartData(new PhotoMessage(chatId, photoFile)
-            {
-                Caption = caption,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }.ToParameterDictionary()));
+            return await SendPostRequest<Message>("sendPhoto", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
 
         public async Task<Message> SendAudioAsync(AudioMessage message)
         {
-            return await SendPostRequest<Message>("sendAudio", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+            return await SendAudioAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendAudioAsync(string chatId, InputFile audioFile, int duration = 0,
-                                                  string performer = "", string title = "", bool disableNotification = false,
-                                                  int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendAudioAsync(AudioMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendAudio", HttpContentBuilder.BuildMultipartData(new AudioMessage(chatId, audioFile)
-            {
-                Duration = duration,
-                Performer = performer,
-                Title = title,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }.ToParameterDictionary()));
+            return await SendPostRequest<Message>("sendAudio", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
 
         public async Task<Message> SendDocumentAsync(DocumentMessage message)
         {
-            return await SendPostRequest<Message>("sendDocument", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+            return await SendDocumentAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendDocumentAsync(string chatId, InputFile documentFile, string caption = "",
-                                                     bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendDocumentAsync(DocumentMessage message, CancellationToken cancellationToken)
         {
-
-            return await SendPostRequest<Message>("sendDocument", HttpContentBuilder.BuildMultipartData(new DocumentMessage(chatId, documentFile)
-            {
-                Caption = caption,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }.ToParameterDictionary()));
+            return await SendPostRequest<Message>("sendDocument", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
 
         public async Task<Message> SendStickerAsync(StickerMessage message)
         {
-            return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+            return await SendStickerAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendStickerAsync(string chatId, InputFile stickerFile, bool disableNotification = false,
-                                                    int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendStickerAsync(StickerMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(new StickerMessage(chatId, stickerFile)
-            {
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }.ToParameterDictionary()));
+            return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
 
         public async Task<Message> SendVideoAsync(VideoMessage message)
         {
-            return await SendPostRequest<Message>("sendVideo", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+            return await SendVideoAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendVideoAsync(string chatId, InputFile videoFile, int duration = 0,
-                                                  int width = 0, int height = 0, string caption = "",
-                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendVideoAsync(VideoMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendVideo", HttpContentBuilder.BuildMultipartData(new VideoMessage(chatId, videoFile)
-            {
-                Duration = duration,
-                Width = width,
-                Height = height,
-                Caption = caption,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }.ToParameterDictionary()));
+            return await SendPostRequest<Message>("sendVideo", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
 
         public async Task<Message> SendVoiceAsync(VoiceMessage message)
         {
-            return await SendPostRequest<Message>("sendVoice", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()));
+            return await SendVoiceAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendVoiceAsync(string chatId, InputFile voiceFile, int duration = 0,
-                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendVoiceAsync(VoiceMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendVoice", HttpContentBuilder.BuildMultipartData(new VoiceMessage(chatId, voiceFile)
-            {
-                Duration = duration,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }.ToParameterDictionary()));
+            return await SendPostRequest<Message>("sendVoice", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
 
         public async Task<Message> SendLocationAsync(LocationMessage message)
         {
-            return await SendPostRequest<Message>("sendLocation", HttpContentBuilder.BuildJsonContent(message));
+            return await SendLocationAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendLocationAsync(string chatId, float latitudeValue, float longitudeValue,
-                                                     bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendLocationAsync(LocationMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendLocation", HttpContentBuilder.BuildJsonContent(new LocationMessage(chatId, latitudeValue, longitudeValue)
-            {
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }));
+            return await SendPostRequest<Message>("sendLocation", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
         public async Task<Message> SendVenueAsync(VenueMessage message)
         {
-            return await SendPostRequest<Message>("sendVenue", HttpContentBuilder.BuildJsonContent(message));
+            return await SendVenueAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendVenueAsync(string chatId, float latitude, float longitude,
-                                                  string title, string address, string foursquareId = "",
-                                                  bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendVenueAsync(VenueMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendVenue", HttpContentBuilder.BuildJsonContent(new VenueMessage(chatId, latitude, longitude, title, address)
-            {
-                FoursquareId = foursquareId,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }));
+            return await SendPostRequest<Message>("sendVenue", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
         public async Task<Message> SendContactAsync(ContactMessage message)
         {
-            return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(message));
+            return await SendContactAsync(message, CancellationToken.None);
         }
 
-        public async Task<Message> SendContactAsync(string chatId, string phoneNumber, string firstName, string lastName = "", bool disableNotification = false, int replyMessageId = 0, IReplyMarkup replyMarkup = null)
+        public async Task<Message> SendContactAsync(ContactMessage message, CancellationToken cancellationToken)
         {
-            return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(new ContactMessage(chatId, phoneNumber, firstName)
-            {
-                LastName = lastName,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyMessageId,
-                ReplyMarkup = replyMarkup
-            }));
+            return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
         async Task<T> SendGetRequest<T>(string method)
