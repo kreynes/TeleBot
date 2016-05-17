@@ -180,6 +180,62 @@ namespace TeleBot
             return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
+        public async Task<UserProfilePhotos> SendGetUserProfilePhotos(int userId, int pOffset = 0, int pLimit = 0)
+        {
+            return await SendGetUserProfilePhotos(userId, CancellationToken.None, pOffset, pLimit);
+        }
+
+        public async Task<UserProfilePhotos> SendGetUserProfilePhotos(int userId, CancellationToken cancellationToken, int pOffset = 0, int pLimit = 0)
+        {
+            return await SendPostRequest<UserProfilePhotos>("getUserProfilePhotos", HttpContentBuilder.BuildJsonContent(new
+            {
+                user_id = userId,
+                offset = pOffset,
+                limit = pLimit
+            }), cancellationToken);
+        }
+
+        public async Task<File> SendGetFile(string fileId)
+        {
+            return await SendGetFile(fileId, CancellationToken.None);
+        }
+
+        public async Task<File> SendGetFile(string fileId, CancellationToken cancellationToken)
+        {
+            return await SendPostRequest<File>("getFile", HttpContentBuilder.BuildJsonContent(new
+            {
+                file_id = fileId
+            }), cancellationToken);
+        }
+
+        public async Task<bool> SendKickChatMember(string chatId, int userId)
+        {
+            return await SendKickChatMember(chatId, userId, CancellationToken.None);
+        }
+
+        public async Task<bool> SendKickChatMember(string chatId, int userId, CancellationToken cancellationToken)
+        {
+            return await SendPostRequest<bool>("kickChatMember", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId,
+                user_id = userId
+            }), cancellationToken);
+        }
+
+        public async Task<bool> SendUnbanChatMember(string chatId, int userId)
+        {
+            return await SendUnbanChatMember(chatId, userId, CancellationToken.None);
+        }
+
+        public async Task<bool> SendUnbanChatMember(string chatId, int userId, CancellationToken cancellationToken)
+        {
+            return await SendPostRequest<bool>("unbanChatMember", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId,
+                user_id = userId
+            }), cancellationToken);
+        }
+
         async Task<T> SendGetRequest<T>(string method, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(method))
@@ -197,6 +253,7 @@ namespace TeleBot
                 throw new ApiRequestException(respObj.Description, respObj.ErrorCode);
             return respObj.Result;
         }
+
 
         async Task<T> SendPostRequest<T>(string method, HttpContent content, CancellationToken cancellationToken)
         {
