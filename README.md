@@ -10,8 +10,9 @@ TeleBot is a lightweight asynchronous wrapper for the Telegram API written in C#
 ### Example
 
 ```csharp
-using TeleBot;
-using TeleBot.API.Message;
+        using TeleBot;
+        using TeleBot.API.Message
+        
         public static void Main()
         {
             InitializeBot().Wait();
@@ -21,7 +22,7 @@ using TeleBot.API.Message;
         {
             //Creates a new instance of a bot, with the provided 
             //Telegram Bot API Token.
-            bot = new Bot("api_token"); 
+            var bot = new Bot("api_token"); 
             //Send s getMe GET Request, to check if the bot is 
             //authenticating correctly.
             var userbot = await bot.SendGetMeAsync(); //
