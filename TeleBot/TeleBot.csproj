@@ -82,8 +82,11 @@
     <Compile Include="API\Message\LocationMessage.cs" />
     <Compile Include="API\Message\VenueMessage.cs" />
     <Compile Include="API\Message\ContactMessage.cs" />
-    <Compile Include="API\Message\EditTextMessage.cs" />
+    <Compile Include="API\Message\EditMessageText.cs" />
     <Compile Include="API\Message\IMediaMessage.cs" />
+    <Compile Include="API\Message\IEditMessage.cs" />
+    <Compile Include="API\Message\EditMessageCaption.cs" />
+    <Compile Include="API\Message\EditMessageReplyMarkup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

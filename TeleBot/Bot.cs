@@ -89,7 +89,7 @@ namespace TeleBot
         {
             return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
-
+        //TODO Refactor SendMediaAsync to check media types
         public async Task<Message> SendMediaAsync(IMediaMessage message)
         {
             return await SendMediaAsync(message, CancellationToken.None);
@@ -99,67 +99,7 @@ namespace TeleBot
         {
             return await SendPostRequest<Message>(message.ApiMethod, HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
-        /*
-        public async Task<Message> SendPhotoAsync(PhotoMessage message)
-        {
-            return await SendPhotoAsync(message, CancellationToken.None);
-        }
 
-        public async Task<Message> SendPhotoAsync(PhotoMessage message, CancellationToken cancellationToken)
-        {
-            return await SendPostRequest<Message>("sendPhoto", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
-        }
-
-        public async Task<Message> SendAudioAsync(AudioMessage message)
-        {
-            return await SendAudioAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendAudioAsync(AudioMessage message, CancellationToken cancellationToken)
-        {
-            return await SendPostRequest<Message>("sendAudio", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
-        }
-
-        public async Task<Message> SendDocumentAsync(DocumentMessage message)
-        {
-            return await SendDocumentAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendDocumentAsync(DocumentMessage message, CancellationToken cancellationToken)
-        {
-            return await SendPostRequest<Message>("sendDocument", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
-        }
-
-        public async Task<Message> SendStickerAsync(StickerMessage message)
-        {
-            return await SendStickerAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendStickerAsync(StickerMessage message, CancellationToken cancellationToken)
-        {
-            return await SendPostRequest<Message>("sendSticker", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
-        }
-
-        public async Task<Message> SendVideoAsync(VideoMessage message)
-        {
-            return await SendVideoAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendVideoAsync(VideoMessage message, CancellationToken cancellationToken)
-        {
-            return await SendPostRequest<Message>("sendVideo", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
-        }
-
-        public async Task<Message> SendVoiceAsync(VoiceMessage message)
-        {
-            return await SendVoiceAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendVoiceAsync(VoiceMessage message, CancellationToken cancellationToken)
-        {
-            return await SendPostRequest<Message>("sendVoice", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
-        }
-        */
         public async Task<Message> SendLocationAsync(LocationMessage message)
         {
             return await SendLocationAsync(message, CancellationToken.None);
@@ -204,8 +144,6 @@ namespace TeleBot
                 limit = pLimit
             }), cancellationToken);
         }
-
-
 
         public async Task<File> SendGetFile(string fileId)
         {
@@ -261,6 +199,16 @@ namespace TeleBot
                 text = pText,
                 show_alert = showAlert
             }), cancellationToken);
+        }
+
+        public async Task<Message> SendEditMessageAsync(IEditMessage message)
+        {
+            return await SendEditMessageAsync(message, CancellationToken.None);
+        }
+
+        public async Task<Message> SendEditMessageAsync(IEditMessage message, CancellationToken cancellationToken)
+        {
+            return await SendPostRequest<Message>(message.ApiMethod, HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
         async Task<T> SendGetRequest<T>(string method, CancellationToken cancellationToken)

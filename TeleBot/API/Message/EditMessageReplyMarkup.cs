@@ -1,21 +1,22 @@
 ﻿using System;
-using TeleBot.API.Enums;
-using TeleBot.API.Types;
 using Newtonsoft.Json;
+using TeleBot.API.Types;
 
 namespace TeleBot
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class EditTextMessage
+    public class EditMessageReplyMarkup : IEditMessage
     {
-        public EditTextMessage(string text, string chatId = "", int messageId = 0, string inlineMessageId = "")
+        public EditMessageReplyMarkup(IReplyMarkup replyMarkup, string chatId = "", int messageId = 0, string inlineMessageId = "")
         {
             if (string.IsNullOrWhiteSpace(chatId) && messageId == 0 && string.IsNullOrEmpty(inlineMessageId))
                 throw new ArgumentException("One of the optional parameters must be supplied!");
-            if (string.IsNullOrWhiteSpace(text))
-                throw new ArgumentException("Null or whitespace.", nameof(text));
+            if (replyMarkup == null)
+                throw new ArgumentException("Null or whitespace.", nameof(replyMarkup));
             ChatId = chatId;
-            Text = text;
+            MessageId = messageId;
+            InlineMessageId = inlineMessageId;
+            ReplyMarkup = replyMarkup;
         }
 
         [JsonProperty(PropertyName = "chat_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
@@ -27,17 +28,10 @@ namespace TeleBot
         [JsonProperty(PropertyName = "inline_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string InlineMessageId { get; set; } = "";
 
-        [JsonProperty(PropertyName = "text", Required = Required.Always)]
-        public string Text { get; set; }
-
-        [JsonProperty(PropertyName = "parse_mode", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public ParseMode ParseMode { get; set; } = ParseMode.Default;
-
-        [JsonProperty(PropertyName = "disable_web_page_preview", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public bool DisableLinkPreview { get; set; } = false;
-
         [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public IReplyMarkup ReplyMarkup { get; set; } = null;
+
+        public string ApiMethod { get; } = "editMessageCaption";
     }
 }
 
