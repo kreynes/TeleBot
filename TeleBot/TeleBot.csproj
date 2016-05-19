@@ -87,10 +87,14 @@
     <Compile Include="API\Message\IEditMessage.cs" />
     <Compile Include="API\Message\EditMessageCaption.cs" />
     <Compile Include="API\Message\EditMessageReplyMarkup.cs" />
+    <Compile Include="API\Types\Inline\InlineQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="API\Types\Inline\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
