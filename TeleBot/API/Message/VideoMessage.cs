@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using TeleBot.API.Types;
 
 namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class VideoMessage : IMessageWithReply
+    public class VideoMessage : IMediaMessage
     {
         public VideoMessage(string chatId, InputFile video)
         {
@@ -14,7 +15,7 @@ namespace TeleBot.API.Message
             if (video == null)
                 throw new ArgumentNullException(nameof(video));
             ChatId = chatId;
-            Video = video;
+            File = video; //TODO Refactor
         }
 
         public VideoMessage(string chatId, string fileId)
@@ -31,7 +32,7 @@ namespace TeleBot.API.Message
         public string ChatId { get; set; }
 
         [JsonProperty(PropertyName = "video", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public InputFile Video { get; set; }
+        public InputFile File { get; set; }
 
         [JsonProperty(PropertyName = "video", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string FileId { get; set; }
@@ -56,6 +57,23 @@ namespace TeleBot.API.Message
 
         [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public IReplyMarkup ReplyMarkup { get; set; } = null;
+
+        public string ApiMethod { get; } = "sendVideo";
+
+        public Dictionary<string, object> ToParameterDictionary()
+        {
+            return new Dictionary<string, object>
+            {
+                {"chat_id", ChatId},
+                {"document", File ?? (object)FileId},
+                {"duration", Duration},
+                {"width", Width},
+                {"height", Height},
+                {"disable_notification", DisableNotification},
+                {"reply_to_message_id", ReplyToMessageId},
+                {"reply_markup", ReplyMarkup}
+            };
+        }
     }
 }
 

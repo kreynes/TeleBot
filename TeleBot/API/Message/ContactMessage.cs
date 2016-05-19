@@ -5,7 +5,7 @@ using TeleBot.API.Types;
 namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ContactMessage : IMessageWithReply
+    public class ContactMessage
     {
         public ContactMessage(string chatId, string phoneNumber, string firstName)
         {

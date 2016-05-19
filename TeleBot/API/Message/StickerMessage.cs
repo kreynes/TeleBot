@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using TeleBot.API.Types;
 
 namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class StickerMessage : IMessageWithReply
+    public class StickerMessage : IMediaMessage
     {
         public StickerMessage(string chatId, InputFile sticker)
         {
@@ -14,7 +15,7 @@ namespace TeleBot.API.Message
             if (sticker == null)
                 throw new ArgumentNullException(nameof(sticker));
             ChatId = chatId;
-            Sticker = sticker;
+            File = sticker; //TODO Refactor
         }
 
         public StickerMessage(string chatId, string fileId)
@@ -31,7 +32,7 @@ namespace TeleBot.API.Message
         public string ChatId { get; set; }
 
         [JsonProperty(PropertyName = "sticker", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public InputFile Sticker { get; set; }
+        public InputFile File { get; set; }
 
         [JsonProperty(PropertyName = "sticker", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string FileId { get; set; }
@@ -44,5 +45,19 @@ namespace TeleBot.API.Message
 
         [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public IReplyMarkup ReplyMarkup { get; set; } = null;
+
+        public string ApiMethod { get; } = "sendSticker";
+
+        public Dictionary<string, object> ToParameterDictionary()
+        {
+            return new Dictionary<string, object>
+            {
+                {"chat_id", ChatId},
+                {"sticker", File ?? (object)FileId},
+                {"disable_notification", DisableNotification},
+                {"reply_to_message_id", ReplyToMessageId},
+                {"reply_markup", ReplyMarkup}
+            };
+        }
     }
 }

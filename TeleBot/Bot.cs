@@ -32,7 +32,7 @@ namespace TeleBot
 
             AuthenticationToken = authenticationToken;
             client = new HttpClient();
-            pollingTimer = new System.Timers.Timer(PollTimeout);
+            pollingTimer = new System.Timers.Timer(1);
             pollingTimer.Elapsed += PollingTimer_Elapsed;
         }
 
@@ -90,6 +90,16 @@ namespace TeleBot
             return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
+        public async Task<Message> SendMediaAsync(IMediaMessage message)
+        {
+            return await SendMediaAsync(message, CancellationToken.None);
+        }
+
+        public async Task<Message> SendMediaAsync(IMediaMessage message, CancellationToken cancellationToken)
+        {
+            return await SendPostRequest<Message>(message.ApiMethod, HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
+        }
+        /*
         public async Task<Message> SendPhotoAsync(PhotoMessage message)
         {
             return await SendPhotoAsync(message, CancellationToken.None);
@@ -149,7 +159,7 @@ namespace TeleBot
         {
             return await SendPostRequest<Message>("sendVoice", HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
-
+        */
         public async Task<Message> SendLocationAsync(LocationMessage message)
         {
             return await SendLocationAsync(message, CancellationToken.None);
@@ -195,6 +205,8 @@ namespace TeleBot
             }), cancellationToken);
         }
 
+
+
         public async Task<File> SendGetFile(string fileId)
         {
             return await SendGetFile(fileId, CancellationToken.None);
@@ -233,6 +245,21 @@ namespace TeleBot
             {
                 chat_id = chatId,
                 user_id = userId
+            }), cancellationToken);
+        }
+
+        public async Task<bool> SendAnswerCallbackQuery(string callbackQueryId, string pText = "", bool showAlert = false)
+        {
+            return await SendAnswerCallbackQuery(callbackQueryId, CancellationToken.None, pText, showAlert);
+        }
+
+        public async Task<bool> SendAnswerCallbackQuery(string callbackQueryId, CancellationToken cancellationToken, string pText = "", bool showAlert = false)
+        {
+            return await SendPostRequest<bool>("answerCallbackQuery", HttpContentBuilder.BuildJsonContent(new
+            {
+                callback_query_id = callbackQueryId,
+                text = pText,
+                show_alert = showAlert
             }), cancellationToken);
         }
 

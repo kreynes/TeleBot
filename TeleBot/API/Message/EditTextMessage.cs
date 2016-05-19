@@ -1,25 +1,31 @@
 ﻿using System;
-using Newtonsoft.Json;
 using TeleBot.API.Enums;
 using TeleBot.API.Types;
+using Newtonsoft.Json;
 
-namespace TeleBot.API.Message
+namespace TeleBot
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class TextMessage
+    public class EditTextMessage
     {
-        public TextMessage(string chatId, string text)
+        public EditTextMessage(string text, string chatId = "", int messageId = 0, string inlineMessageId = "")
         {
-            if (string.IsNullOrWhiteSpace(chatId))
-                throw new ArgumentException("Null or whitespace.", nameof(chatId));
+            if (string.IsNullOrWhiteSpace(chatId) && messageId == 0 && string.IsNullOrEmpty(inlineMessageId))
+                throw new ArgumentException("One of the optional parameters must be supplied!");
             if (string.IsNullOrWhiteSpace(text))
                 throw new ArgumentException("Null or whitespace.", nameof(text));
             ChatId = chatId;
             Text = text;
         }
 
-        [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]
-        public string ChatId { get; set; }
+        [JsonProperty(PropertyName = "chat_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string ChatId { get; set; } = "";
+
+        [JsonProperty(PropertyName = "message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int MessageId { get; set; } = 0;
+
+        [JsonProperty(PropertyName = "inline_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string InlineMessageId { get; set; } = "";
 
         [JsonProperty(PropertyName = "text", Required = Required.Always)]
         public string Text { get; set; }
@@ -29,12 +35,6 @@ namespace TeleBot.API.Message
 
         [JsonProperty(PropertyName = "disable_web_page_preview", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool DisableLinkPreview { get; set; } = false;
-
-        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public bool DisableNotification { get; set; } = false;
-
-        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int ReplyToMessageId { get; set; } = 0;
 
         [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public IReplyMarkup ReplyMarkup { get; set; } = null;

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using TeleBot;
+using TeleBot.API.Types;
 using TeleBot.API.Message;
 
 namespace Example
@@ -18,7 +20,6 @@ namespace Example
             bot = new Bot("token");
             var userbot = await bot.SendGetMeAsync();
             Console.WriteLine($"{userbot.FirstName} {userbot.LastName} {userbot.Username} {userbot.Id}");
-            await bot.SendMessageAsync(new TextMessage("chatid", "testtext"));
 
             Console.ReadLine();
         }

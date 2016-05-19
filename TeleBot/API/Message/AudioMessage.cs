@@ -5,7 +5,7 @@ using TeleBot.API.Types;
 namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class AudioMessage : IMessageWithReply
+    public class AudioMessage
     {
         public AudioMessage(string chatId, InputFile audio)
         {

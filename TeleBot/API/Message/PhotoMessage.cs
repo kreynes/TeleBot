@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using TeleBot.API.Types;
 
 namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class PhotoMessage : IMessageWithReply
+    public class PhotoMessage : IMediaMessage
     {
-        public PhotoMessage(string chatId, InputFile photo)
+        public PhotoMessage(string chatId, InputFile file)
         {
             if (string.IsNullOrWhiteSpace(chatId))
                 throw new ArgumentException("Null or whitespace.", nameof(chatId));
-            if (photo == null)
-                throw new ArgumentNullException(nameof(photo));
+            if (file == null)
+                throw new ArgumentNullException(nameof(file));
             ChatId = chatId;
-            Photo = photo;
+            File = file;
         }
 
         public PhotoMessage(string chatId, string fileId)
@@ -31,7 +32,7 @@ namespace TeleBot.API.Message
         public string ChatId { get; set; }
 
         [JsonProperty(PropertyName = "photo", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public InputFile Photo { get; set; }
+        public InputFile File { get; set; }
 
         [JsonProperty(PropertyName = "photo", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string FileId { get; set; }
@@ -47,6 +48,21 @@ namespace TeleBot.API.Message
 
         [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public IReplyMarkup ReplyMarkup { get; set; } = null;
+
+        public string ApiMethod { get; } = "sendPhoto";
+
+        public Dictionary<string, object> ToParameterDictionary()
+        {
+            return new Dictionary<string, object>
+            {
+                {"chat_id", ChatId},
+                {"photo", File ?? (object)FileId},
+                {"caption", Caption},
+                {"disable_notification", DisableNotification},
+                {"reply_to_message_id", ReplyToMessageId},
+                {"reply_markup", ReplyMarkup}
+            };
+        }
     }
 }
 
