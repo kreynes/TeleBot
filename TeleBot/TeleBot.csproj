@@ -88,6 +88,14 @@
     <Compile Include="API\Message\EditMessageCaption.cs" />
     <Compile Include="API\Message\EditMessageReplyMarkup.cs" />
     <Compile Include="API\Types\Inline\InlineQuery.cs" />
+    <Compile Include="API\Types\Inline\IInlineQueryResult.cs" />
+    <Compile Include="API\Types\Inline\IMessageContent.cs" />
+    <Compile Include="API\Types\Inline\InputTextMessageContent.cs" />
+    <Compile Include="API\Types\Inline\InputLocationMessageContent.cs" />
+    <Compile Include="API\Types\Inline\InputVenueMessageContent.cs" />
+    <Compile Include="API\Types\Inline\InputContactMessageContent.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultArticle.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultPhoto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
