@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace TeleBot
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class InputContactMessageContent : IMessageContent
+    public class InputContactMessageContent
     {
         public InputContactMessageContent(string phoneNumber, string firstName)
         {

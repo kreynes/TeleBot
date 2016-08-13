@@ -38,6 +38,6 @@ namespace TeleBot
         public InlineKeyboardMarkup ReplyMarkup { get; set; }
 
         [JsonProperty(PropertyName = "input_message_content", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public IMessageContent InputMessageContent { get; set; }
+        public object InputMessageContent { get; set; }
     }
 }

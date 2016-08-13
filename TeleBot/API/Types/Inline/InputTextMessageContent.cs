@@ -6,7 +6,7 @@ namespace TeleBot
 {
 
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class InputTextMessageContent : IMessageContent
+    public class InputTextMessageContent
     {
         public InputTextMessageContent(string text)
         {

@@ -17,7 +17,7 @@ namespace TeleBot
         public string Title { get; set; }
 
         [JsonProperty(PropertyName = "input_message_content", Required = Required.Always)]
-        public IMessageContent InputMessageContent { get; set; }
+        public object InputMessageContent { get; set; }
 
         [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public InlineKeyboardMarkup ReplyMarkup { get; set; }

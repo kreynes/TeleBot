@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace TeleBot
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class InputVenueMessageContent : IMessageContent
+    public class InputVenueMessageContent
     {
         public InputVenueMessageContent(float latitude, float longitude, string title, string address)
         {

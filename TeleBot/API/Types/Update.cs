@@ -11,6 +11,14 @@ namespace TeleBot.API.Types
         [JsonProperty(PropertyName = "message", Required = Required.Default)]
         public Message Message { get; set; }
 
+        [JsonProperty(PropertyName = "edited_message", Required = Required.Default)]
+        public Message EditedMessage { get; set; }
+
+        [JsonProperty(PropertyName = "inline_query", Required = Required.Default)]
+        public InlineQuery InlineQuery { get; set; }
+
+        //TODO Add ChoseInlineQuery
+
         [JsonProperty(PropertyName = "callback_query", Required = Required.Default)]
         public CallbackQuery CallbackQuery { get; set; }
     }
