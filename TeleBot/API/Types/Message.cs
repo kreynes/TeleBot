@@ -18,13 +18,19 @@ namespace TeleBot.API.Types
         public Chat Chat { get; internal set; }
 
         [JsonProperty(PropertyName = "forward_from", Required = Required.Default)]
-        public User ForwardedFrom { get; internal set; }
+        public User ForwardFrom { get; internal set; }
+
+        [JsonProperty(PropertyName = "forward_from_chat", Required = Required.Default)]
+        public Chat ForwardFromChat { get; internal set; }
 
         [JsonProperty(PropertyName = "forward_date", Required = Required.Default)]
         public int ForwardDate { get; internal set; }
 
         [JsonProperty(PropertyName = "reply_to_message", Required = Required.Default)]
         public Message ReplyToMessage { get; internal set; }
+
+        [JsonProperty(PropertyName = "edit_date", Required = Required.Default)]
+        public int EditDate { get; internal set; }
 
         [JsonProperty(PropertyName = "text", Required = Required.Default)]
         public string Text { get; internal set; }

@@ -17,6 +17,9 @@ namespace TeleBot.API.Types
         [JsonProperty(PropertyName = "thumb", Required = Required.Default)]
         public PhotoSize Thumbnail { get; internal set; }
 
+        [JsonProperty(PropertyName = "emoji", Required = Required.Default)]
+        public string Emoji { get; internal set; }
+
         [JsonProperty(PropertyName = "file_size", Required = Required.Default)]
         public int FileSize { get; internal set; }
     }

@@ -89,16 +89,20 @@
     <Compile Include="API\Message\EditMessageReplyMarkup.cs" />
     <Compile Include="API\Types\Inline\InlineQuery.cs" />
     <Compile Include="API\Types\Inline\IInlineQueryResult.cs" />
-    <Compile Include="API\Types\Inline\InputTextMessageContent.cs" />
-    <Compile Include="API\Types\Inline\InputLocationMessageContent.cs" />
-    <Compile Include="API\Types\Inline\InputVenueMessageContent.cs" />
-    <Compile Include="API\Types\Inline\InputContactMessageContent.cs" />
     <Compile Include="API\Types\Inline\InlineQueryResultArticle.cs" />
     <Compile Include="API\Types\Inline\InlineQueryResultPhoto.cs" />
+    <Compile Include="API\Types\ChatMember.cs" />
+    <Compile Include="API\Message\ChatAction.cs" />
+    <Compile Include="API\Types\Inline\MessageContent\InputContactMessageContent.cs" />
+    <Compile Include="API\Types\Inline\MessageContent\InputLocationMessageContent.cs" />
+    <Compile Include="API\Types\Inline\MessageContent\InputTextMessageContent.cs" />
+    <Compile Include="API\Types\Inline\MessageContent\InputVenueMessageContent.cs" />
+    <Compile Include="API\Types\Inline\InputQueryResultGif.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Folder Include="API\Types\Inline\" />
+    <Folder Include="API\Types\Inline\MessageContent\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

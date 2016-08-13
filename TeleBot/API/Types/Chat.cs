@@ -8,7 +8,7 @@ namespace TeleBot.API.Types
     public class Chat
     {
         [JsonProperty(PropertyName = "id", Required = Required.Always)]
-        public int Id { get; internal set; }
+        public long Id { get; internal set; }
 
         [JsonProperty(PropertyName = "type", Required = Required.Always)]
         [JsonConverter(typeof(ChatTypeEnumConverter))]

@@ -7,6 +7,7 @@ namespace TeleBot.API.Types
     {
         [JsonProperty(PropertyName = "hide_keyboard", Required = Required.Always)]
         public bool HideKeyboard { get; set; }
+
         [JsonProperty(PropertyName = "selective", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool Selective { get; set; }
     }

@@ -45,22 +45,12 @@ namespace TeleBot
             }
         }
 
-        public async Task<User> SendGetMeAsync()
-        {
-            return await SendGetMeAsync(CancellationToken.None);
-        }
-
-        public async Task<User> SendGetMeAsync(CancellationToken cancellationToken)
+        public async Task<User> SendGetMeAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendGetRequest<User>("getMe", cancellationToken);
         }
 
-        public async Task<Update[]> SendGetUpdatesAsync()
-        {
-            return await SendGetUpdatesAsync(CancellationToken.None);
-        }
-
-        public async Task<Update[]> SendGetUpdatesAsync(CancellationToken cancellationToken)
+        public async Task<Update[]> SendGetUpdatesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<Update[]>("getUpdates", HttpContentBuilder.BuildJsonContent(new
             {
@@ -70,72 +60,42 @@ namespace TeleBot
             }), cancellationToken);
         }
 
-        public async Task<Message> SendMessageAsync(TextMessage message)
-        {
-            return await SendMessageAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendMessageAsync(TextMessage message, CancellationToken cancellationToken)
+        public async Task<Message> SendMessageAsync(TextMessage message, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<Message>("sendMessage", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
-        public async Task<Message> SendForwardMessageAsync(ForwardMessage message)
-        {
-            return await SendForwardMessageAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendForwardMessageAsync(ForwardMessage message, CancellationToken cancellationToken)
+        public async Task<Message> SendForwardMessageAsync(ForwardMessage message, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<Message>("forwardMessage", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
         //TODO Refactor SendMediaAsync to check media types
-        public async Task<Message> SendMediaAsync(IMediaMessage message)
-        {
-            return await SendMediaAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendMediaAsync(IMediaMessage message, CancellationToken cancellationToken)
+        public async Task<Message> SendMediaAsync(IMediaMessage message, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<Message>(message.ApiMethod, HttpContentBuilder.BuildMultipartData(message.ToParameterDictionary()), cancellationToken);
         }
 
-        public async Task<Message> SendLocationAsync(LocationMessage message)
-        {
-            return await SendLocationAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendLocationAsync(LocationMessage message, CancellationToken cancellationToken)
+        public async Task<Message> SendLocationAsync(LocationMessage message, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<Message>("sendLocation", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
-        public async Task<Message> SendVenueAsync(VenueMessage message)
-        {
-            return await SendVenueAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendVenueAsync(VenueMessage message, CancellationToken cancellationToken)
+        public async Task<Message> SendVenueAsync(VenueMessage message, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<Message>("sendVenue", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
-        public async Task<Message> SendContactAsync(ContactMessage message)
-        {
-            return await SendContactAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendContactAsync(ContactMessage message, CancellationToken cancellationToken)
+        public async Task<Message> SendContactAsync(ContactMessage message, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<Message>("sendContact", HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
-
-        public async Task<UserProfilePhotos> SendGetUserProfilePhotos(int userId, int pOffset = 0, int pLimit = 0)
+        //TODO Refactor with an Enum
+        public async Task SendChatAction(ChatAction chatAction, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await SendGetUserProfilePhotos(userId, CancellationToken.None, pOffset, pLimit);
+            await SendPostRequest<bool>("sencAction", HttpContentBuilder.BuildJsonContent(chatAction), cancellationToken);
         }
 
-        public async Task<UserProfilePhotos> SendGetUserProfilePhotos(int userId, CancellationToken cancellationToken, int pOffset = 0, int pLimit = 0)
+        public async Task<UserProfilePhotos> SendGetUserProfilePhotos(int userId, int pOffset = 0, int pLimit = 0, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<UserProfilePhotos>("getUserProfilePhotos", HttpContentBuilder.BuildJsonContent(new
             {
@@ -145,12 +105,7 @@ namespace TeleBot
             }), cancellationToken);
         }
 
-        public async Task<File> SendGetFile(string fileId)
-        {
-            return await SendGetFile(fileId, CancellationToken.None);
-        }
-
-        public async Task<File> SendGetFile(string fileId, CancellationToken cancellationToken)
+        public async Task<File> SendGetFile(string fileId, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<File>("getFile", HttpContentBuilder.BuildJsonContent(new
             {
@@ -158,12 +113,7 @@ namespace TeleBot
             }), cancellationToken);
         }
 
-        public async Task<bool> SendKickChatMember(string chatId, int userId)
-        {
-            return await SendKickChatMember(chatId, userId, CancellationToken.None);
-        }
-
-        public async Task<bool> SendKickChatMember(string chatId, int userId, CancellationToken cancellationToken)
+        public async Task<bool> SendKickChatMember(string chatId, int userId, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<bool>("kickChatMember", HttpContentBuilder.BuildJsonContent(new
             {
@@ -172,12 +122,23 @@ namespace TeleBot
             }), cancellationToken);
         }
 
-        public async Task<bool> SendUnbanChatMember(string chatId, int userId)
+        public async Task<bool> SendLeaveChat(string chatId, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await SendUnbanChatMember(chatId, userId, CancellationToken.None);
+            return await SendPostRequest<bool>("leaveChat", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
         }
 
-        public async Task<bool> SendUnbanChatMember(string chatId, int userId, CancellationToken cancellationToken)
+        public async Task<bool> SendLeaveChat(int chatId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await SendPostRequest<bool>("leaveChat", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
+        }
+
+        public async Task<bool> SendUnbanChatMember(string chatId, int userId, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<bool>("unbanChatMember", HttpContentBuilder.BuildJsonContent(new
             {
@@ -186,12 +147,72 @@ namespace TeleBot
             }), cancellationToken);
         }
 
-        public async Task<bool> SendAnswerCallbackQuery(string callbackQueryId, string pText = "", bool showAlert = false)
+        public async Task<Chat> SendGetChat(string chatId, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await SendAnswerCallbackQuery(callbackQueryId, CancellationToken.None, pText, showAlert);
+            return await SendPostRequest<Chat>("getChat", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
         }
 
-        public async Task<bool> SendAnswerCallbackQuery(string callbackQueryId, CancellationToken cancellationToken, string pText = "", bool showAlert = false)
+        public async Task<Chat> SendGetChat(int chatId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await SendPostRequest<Chat>("getChat", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
+        }
+
+        public async Task<ChatMember[]> SendGetChatAdministrators(string chatId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await SendPostRequest<ChatMember[]>("getChatAdministrators", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
+        }
+
+        public async Task<ChatMember[]> SendGetChatAdministrators(int chatId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await SendPostRequest<ChatMember[]>("getChatAdministrators", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
+        }
+
+        public async Task<int> SendGetChatMembersCount(string chatId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await SendPostRequest<int>("getChatMembersCount", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
+        }
+
+        public async Task<int> SendGetChatMembersCount(int chatId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await SendPostRequest<int>("getChatMembersCount", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
+        }
+
+        public async Task<ChatMember> SendGetChatMamber(string chatId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await SendPostRequest<ChatMember>("getChatMember", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
+        }
+
+        public async Task<ChatMember> SendGetChatMamber(int chatId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return await SendPostRequest<ChatMember>("getChatMember", HttpContentBuilder.BuildJsonContent(new
+            {
+                chat_id = chatId
+            }), cancellationToken);
+        }
+
+
+        public async Task<bool> SendAnswerCallbackQuery(string callbackQueryId, string pText = "", bool showAlert = false, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<bool>("answerCallbackQuery", HttpContentBuilder.BuildJsonContent(new
             {
@@ -201,17 +222,12 @@ namespace TeleBot
             }), cancellationToken);
         }
 
-        public async Task<Message> SendEditMessageAsync(IEditMessage message)
-        {
-            return await SendEditMessageAsync(message, CancellationToken.None);
-        }
-
-        public async Task<Message> SendEditMessageAsync(IEditMessage message, CancellationToken cancellationToken)
+        public async Task<Message> SendEditMessageAsync(IEditMessage message, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await SendPostRequest<Message>(message.ApiMethod, HttpContentBuilder.BuildJsonContent(message), cancellationToken);
         }
 
-        async Task<T> SendGetRequest<T>(string method, CancellationToken cancellationToken)
+        async Task<T> SendGetRequest<T>(string method, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(method))
                 throw new ArgumentException("Null or whitespace", nameof(method));
@@ -230,7 +246,7 @@ namespace TeleBot
         }
 
 
-        async Task<T> SendPostRequest<T>(string method, HttpContent content, CancellationToken cancellationToken)
+        async Task<T> SendPostRequest<T>(string method, HttpContent content, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(method))
                 throw new ArgumentException("Null or whitespace", nameof(method));

@@ -11,7 +11,7 @@ namespace TeleBot
         public string Id { get; set; }
 
         [JsonProperty(PropertyName = "from", Required = Required.Always)]
-        public User Sender { get; set; }
+        public User From { get; set; }
 
         [JsonProperty(PropertyName = "location", Required = Required.Default)]
         public Location Location { get; set; }

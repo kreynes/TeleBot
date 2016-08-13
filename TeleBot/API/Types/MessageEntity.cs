@@ -19,6 +19,9 @@ namespace TeleBot.API.Types
 
         [JsonProperty(PropertyName = "url", Required = Required.Default)]
         public string Url { get; internal set; }
+
+        [JsonProperty(PropertyName = "user", Required = Required.Default)]
+        public User User { get; internal set; }
     }
 }
 
