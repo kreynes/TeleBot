@@ -98,6 +98,11 @@
     <Compile Include="API\Types\Inline\MessageContent\InputTextMessageContent.cs" />
     <Compile Include="API\Types\Inline\MessageContent\InputVenueMessageContent.cs" />
     <Compile Include="API\Types\Inline\InputQueryResultGif.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultMpeg4Gif.cs" />
+    <Compile Include="API\Types\Inline\InputQueryResultVideo.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultAudio.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultVoice.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultDocument.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

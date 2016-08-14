@@ -19,6 +19,7 @@ namespace TeleBot.API
             });
             return new StringContent(json, System.Text.Encoding.UTF8, "application/json");
         }
+
         internal static HttpContent BuildMultipartData(Dictionary<string, object> formDataParameters)
         {
             if (formDataParameters == null)

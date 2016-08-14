@@ -17,7 +17,7 @@ namespace Example
 
         public static async Task InitializeBot()
         {
-            bot = new Bot("token");
+            bot = new Bot("217865210:AAEkBaHOnCQdJS7C2cYRieiW3VFZy_Bkrkk");
             var userbot = await bot.SendGetMeAsync();
             Console.WriteLine($"{userbot.FirstName} {userbot.LastName} {userbot.Username} {userbot.Id}");
 

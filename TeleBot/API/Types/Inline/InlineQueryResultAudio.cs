@@ -5,7 +5,7 @@ using TeleBot.API.Types;
 namespace TeleBot
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class InputQueryResultGif
+    public class InlineQueryResultAudio
     {
         [JsonProperty(PropertyName = "type", Required = Required.Always)]
         public string Type { get; set; }
@@ -13,23 +13,17 @@ namespace TeleBot
         [JsonProperty(PropertyName = "id", Required = Required.Always)]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "gif_url", Required = Required.Always)]
+        [JsonProperty(PropertyName = "audio_url", Required = Required.Always)]
         public string Url { get; set; }
 
-        [JsonProperty(PropertyName = "gif_width", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int Width { get; set; }
-
-        [JsonProperty(PropertyName = "gif_height", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int Height { get; set; }
-
-        [JsonProperty(PropertyName = "thumb_url", Required = Required.Always)]
-        public string ThumnailUrl { get; set; }
-
-        [JsonProperty(PropertyName = "title", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "title", Required = Required.Always)]
         public string Title { get; set; }
 
-        [JsonProperty(PropertyName = "caption", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "performer", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string Caption { get; set; }
+
+        [JsonProperty(PropertyName = "audio_duration", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int Duration { get; set; }
 
         [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public InlineKeyboardMarkup ReplyMarkup { get; set; }
@@ -38,4 +32,5 @@ namespace TeleBot
         public object InputMessageContent { get; set; }
     }
 }
+
 
