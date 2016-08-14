@@ -10,7 +10,7 @@ branches:
     - develop
 
 script:
-    - xbuild /t:Rebuild /p:Configuration=Release TeleBot.sln
+    - travis_wait xbuild /t:Rebuild /p:Configuration=Release TeleBot.sln
 
 notifications:
     email: false
