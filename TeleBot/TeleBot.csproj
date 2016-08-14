@@ -103,6 +103,9 @@
     <Compile Include="API\Types\Inline\InlineQueryResultAudio.cs" />
     <Compile Include="API\Types\Inline\InlineQueryResultVoice.cs" />
     <Compile Include="API\Types\Inline\InlineQueryResultDocument.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultLocation.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultVenue.cs" />
+    <Compile Include="API\Types\Inline\InlineQueryResultContact.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
