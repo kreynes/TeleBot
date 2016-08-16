@@ -1,5 +1,5 @@
 language: csharp
-mono: weekly
+mono: latest
 os: linux
 solution: TeleBot.sln
 sudo: false
