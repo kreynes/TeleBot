@@ -12,4 +12,3 @@ namespace TeleBot.API.Types
         public float Latitude { get; internal set; }
     }
 }
-

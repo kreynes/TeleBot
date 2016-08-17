@@ -4,9 +4,6 @@ namespace TeleBot.API
 {
     public class ApiRequestException : Exception
     {
-
-        public int ErrorCode { get; internal set; }
-
         public ApiRequestException(string message) : base(message)
         {
         }
@@ -15,6 +12,7 @@ namespace TeleBot.API
         {
             ErrorCode = errorCode;
         }
+
+        public int ErrorCode { get; internal set; }
     }
 }
-

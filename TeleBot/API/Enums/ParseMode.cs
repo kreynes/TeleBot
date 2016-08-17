@@ -3,7 +3,7 @@ using TeleBot.API.Extensions;
 
 namespace TeleBot.API.Enums
 {
-    [JsonConverter(typeof(ParseModeEnumConverter))]
+    [JsonConverter(typeof (ParseModeEnumConverter))]
     public enum ParseMode
     {
         Default,
@@ -11,4 +11,3 @@ namespace TeleBot.API.Enums
         Html
     }
 }
-

@@ -19,22 +19,25 @@ namespace TeleBot.API.Message
             Caption = Caption;
         }
 
-        [JsonProperty(PropertyName = "chat_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string ChatId { get; set; } = "";
-
-        [JsonProperty(PropertyName = "message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int MessageId { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "inline_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string InlineMessageId { get; set; } = "";
-
         [JsonProperty(PropertyName = "caption", Required = Required.Always)]
         public string Caption { get; set; }
 
-        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public IReplyMarkup ReplyMarkup { get; set; } = null;
+        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public IReplyMarkup ReplyMarkup { get; set; }
+
+        [JsonProperty(PropertyName = "chat_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string ChatId { get; set; }
+
+        [JsonProperty(PropertyName = "message_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int MessageId { get; set; }
+
+        [JsonProperty(PropertyName = "inline_message_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string InlineMessageId { get; set; }
 
         public string ApiMethod { get; } = "editMessageCaption";
     }
 }
-

@@ -13,7 +13,7 @@ namespace TeleBot
 {
     public class Bot : IDisposable
     {
-        private const string baseUrl = "https://api.telegram.org/bot";
+        private const string BaseUrl = "https://api.telegram.org/bot";
 
         private HttpClient client;
 
@@ -285,7 +285,7 @@ namespace TeleBot
             if (string.IsNullOrWhiteSpace(method))
                 throw new ArgumentException("Null or whitespace", nameof(method));
 
-            var uri = new Uri($"{baseUrl}{AuthenticationToken}/{method}");
+            var uri = new Uri($"{BaseUrl}{AuthenticationToken}/{method}");
             var response = await client.GetAsync(uri, cancellationToken);
             Response<T> respObj = null;
             if (response.IsSuccessStatusCode)
@@ -293,7 +293,7 @@ namespace TeleBot
                 var responseString = await response.Content.ReadAsStringAsync();
                 respObj = JsonConvert.DeserializeObject<Response<T>>(responseString);
             }
-            if (!respObj.Ok)
+            if (respObj != null && !respObj.Ok)
                 throw new ApiRequestException(respObj.Description, respObj.ErrorCode);
             return respObj.Result;
         }
@@ -307,7 +307,7 @@ namespace TeleBot
             if (content == null)
                 throw new ArgumentNullException(nameof(content));
 
-            var uri = $"{baseUrl}{AuthenticationToken}/{method}";
+            var uri = $"{BaseUrl}{AuthenticationToken}/{method}";
             var response = await client.PostAsync(uri, content, cancellationToken);
             Response<T> respObj = null;
             var responseString = await response.Content.ReadAsStringAsync();
@@ -321,18 +321,16 @@ namespace TeleBot
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (disposedValue) return;
+            if (disposing)
             {
-                if (disposing)
-                {
-                    client.Dispose();
-                    client = null;
-                    pollingTimer.Dispose();
-                    pollingTimer = null;
-                }
-
-                disposedValue = true;
+                client.Dispose();
+                client = null;
+                pollingTimer.Dispose();
+                pollingTimer = null;
             }
+
+            disposedValue = true;
         }
     }
 }

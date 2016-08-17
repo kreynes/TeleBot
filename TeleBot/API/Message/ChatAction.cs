@@ -15,6 +15,7 @@ namespace TeleBot.API.Message
             ChatIdString = chatId;
             Action = action;
         }
+
         public ChatAction(int chatId, string action)
         {
             if (chatId == default(int))
@@ -26,14 +27,15 @@ namespace TeleBot.API.Message
             Action = action;
         }
 
-        [JsonProperty(PropertyName = "chat_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "chat_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string ChatIdString { get; set; }
 
-        [JsonProperty(PropertyName = "chat_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "chat_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public int ChatIdInt { get; set; }
 
         [JsonProperty(PropertyName = "action", Required = Required.Always)]
         public string Action { get; set; }
     }
 }
-
