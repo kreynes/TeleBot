@@ -1,8 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
-using TeleBot.API.Types;
+﻿using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Types.Inline
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InlineQuery
@@ -23,4 +21,3 @@ namespace TeleBot
         public string Offset { get; set; }
     }
 }
-

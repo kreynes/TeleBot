@@ -28,23 +28,28 @@ namespace TeleBot.API.Message
             FileId = fileId;
         }
 
+        [JsonProperty(PropertyName = "sticker", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string FileId { get; set; }
+
+        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public bool DisableNotification { get; set; } = false;
+
+        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int ReplyToMessageId { get; set; } = 0;
+
+        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public IReplyMarkup ReplyMarkup { get; set; } = null;
+
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]
         public string ChatId { get; set; }
 
-        [JsonProperty(PropertyName = "sticker", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "sticker", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public InputFile File { get; set; }
-
-        [JsonProperty(PropertyName = "sticker", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string FileId { get; set; }
-
-        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public bool DisableNotification { get; set; } = false;
-
-        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int ReplyToMessageId { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public IReplyMarkup ReplyMarkup { get; set; } = null;
 
         public string ApiMethod { get; } = "sendSticker";
 
@@ -53,7 +58,7 @@ namespace TeleBot.API.Message
             return new Dictionary<string, object>
             {
                 {"chat_id", ChatId},
-                {"sticker", File ?? (object)FileId},
+                {"sticker", File ?? (object) FileId},
                 {"disable_notification", DisableNotification},
                 {"reply_to_message_id", ReplyToMessageId},
                 {"reply_markup", ReplyMarkup}

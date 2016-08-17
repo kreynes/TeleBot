@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Types.Inline.MessageContent
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InputContactMessageContent
@@ -22,8 +22,8 @@ namespace TeleBot
         [JsonProperty(PropertyName = "first_name", Required = Required.Always)]
         public string FirstName { get; set; }
 
-        [JsonProperty(PropertyName = "last_name", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "last_name", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string LastName { get; set; }
     }
 }
-

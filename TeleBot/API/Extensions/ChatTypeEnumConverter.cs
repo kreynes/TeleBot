@@ -8,20 +8,20 @@ namespace TeleBot.API.Extensions
     {
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(string);
+            return objectType == typeof (string);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
-            var enumString = (string)reader.Value;
-            return Enum.Parse(typeof(ChatType), enumString, true);
+            var enumString = (string) reader.Value;
+            return Enum.Parse(typeof (ChatType), enumString, true);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var type = (ChatType)value;
+            var type = (ChatType) value;
             writer.WriteValue(type.ToString().ToLower());
         }
     }
 }
-

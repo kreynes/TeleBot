@@ -100,7 +100,5 @@ namespace TeleBot.API.Types
 
         [JsonProperty(PropertyName = "pinned_message", Required = Required.Default)]
         public Message PinnedMessage { get; internal set; }
-
     }
 }
-

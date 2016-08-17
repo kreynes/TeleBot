@@ -1,7 +1,7 @@
-﻿using TeleBot.API.Types;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TeleBot.API.Types;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     public interface IMediaMessage
     {
@@ -11,4 +11,3 @@ namespace TeleBot
         Dictionary<string, object> ToParameterDictionary();
     }
 }
-

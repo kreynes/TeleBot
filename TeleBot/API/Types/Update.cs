@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using TeleBot.API.Types.Inline;
 
 namespace TeleBot.API.Types
 {
@@ -23,4 +24,3 @@ namespace TeleBot.API.Types
         public CallbackQuery CallbackQuery { get; set; }
     }
 }
-

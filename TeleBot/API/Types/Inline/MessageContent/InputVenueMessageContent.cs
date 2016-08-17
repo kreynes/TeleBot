@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Types.Inline.MessageContent
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InputVenueMessageContent
@@ -17,6 +17,7 @@ namespace TeleBot
             Title = title;
             Address = address;
         }
+
         [JsonProperty(PropertyName = "latitude", Required = Required.Always)]
         public float Latitude { get; set; }
 
@@ -29,8 +30,8 @@ namespace TeleBot
         [JsonProperty(PropertyName = "address", Required = Required.Always)]
         public string Address { get; set; }
 
-        [JsonProperty(PropertyName = "foursquare_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "foursquare_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string FoursquareId { get; set; }
     }
 }
-

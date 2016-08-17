@@ -12,4 +12,3 @@ namespace TeleBot.API.Types
         public bool Selective { get; set; }
     }
 }
-

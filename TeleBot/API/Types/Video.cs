@@ -27,4 +27,3 @@ namespace TeleBot.API.Types
         public int FileSize { get; internal set; }
     }
 }
-

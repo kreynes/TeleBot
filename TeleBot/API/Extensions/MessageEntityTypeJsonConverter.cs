@@ -8,12 +8,13 @@ namespace TeleBot.API.Extensions
     {
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(string);
+            return objectType == typeof (string);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
-            var enumString = (string)reader.Value;
+            var enumString = (string) reader.Value;
             MessageEntityType? type = null;
             switch (enumString)
             {
@@ -53,7 +54,7 @@ namespace TeleBot.API.Extensions
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var type = (MessageEntityType)value;
+            var type = (MessageEntityType) value;
             switch (type)
             {
                 case MessageEntityType.Mention:
@@ -90,4 +91,3 @@ namespace TeleBot.API.Extensions
         }
     }
 }
-

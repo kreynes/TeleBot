@@ -1,7 +1,4 @@
-﻿using System;
-using TeleBot.API.Types;
-
-namespace TeleBot
+﻿namespace TeleBot.API.Types.Inline
 {
     public interface IInlineQueryResult
     {
@@ -11,4 +8,3 @@ namespace TeleBot
         InlineKeyboardMarkup ReplyMarkup { get; set; }
     }
 }
-

@@ -18,4 +18,3 @@ namespace TeleBot.API.Types
         public T Result { get; internal set; }
     }
 }
-

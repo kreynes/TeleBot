@@ -1,7 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Types.Inline.MessageContent
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InputLocationMessageContent
@@ -12,6 +11,7 @@ namespace TeleBot
             Latitude = latitude;
             Longitude = longitude;
         }
+
         [JsonProperty(PropertyName = "message_text", Required = Required.Always)]
         public float Latitude { get; set; }
 
@@ -19,4 +19,3 @@ namespace TeleBot
         public float Longitude { get; set; }
     }
 }
-

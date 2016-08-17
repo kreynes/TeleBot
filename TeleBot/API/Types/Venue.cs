@@ -18,4 +18,3 @@ namespace TeleBot.API.Types
         public string FoursquareId { get; internal set; }
     }
 }
-

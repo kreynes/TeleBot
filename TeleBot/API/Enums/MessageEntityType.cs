@@ -11,7 +11,6 @@
         Italic,
         Code,
         Pre,
-        TextLink,
+        TextLink
     }
 }
-

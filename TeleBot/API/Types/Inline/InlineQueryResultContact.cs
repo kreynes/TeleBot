@@ -1,11 +1,6 @@
-﻿using System;
-namespace TeleBot
+﻿namespace TeleBot.API.Types.Inline
 {
     public class InlineQueryResultContact
     {
-        public InlineQueryResultContact()
-        {
-        }
     }
 }
-

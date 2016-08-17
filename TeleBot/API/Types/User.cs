@@ -18,4 +18,3 @@ namespace TeleBot.API.Types
         public string Username { get; internal set; }
     }
 }
-

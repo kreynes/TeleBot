@@ -18,4 +18,3 @@ namespace TeleBot.API.Types
         public string SwitchInlineQuery { get; internal set; }
     }
 }
-

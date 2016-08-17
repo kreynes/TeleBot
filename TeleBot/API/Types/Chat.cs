@@ -11,7 +11,7 @@ namespace TeleBot.API.Types
         public long Id { get; internal set; }
 
         [JsonProperty(PropertyName = "type", Required = Required.Always)]
-        [JsonConverter(typeof(ChatTypeEnumConverter))]
+        [JsonConverter(typeof (ChatTypeEnumConverter))]
         public ChatType Type { get; internal set; }
 
         [JsonProperty(PropertyName = "title", Required = Required.Default)]
@@ -27,4 +27,3 @@ namespace TeleBot.API.Types
         public string LastName { get; internal set; }
     }
 }
-

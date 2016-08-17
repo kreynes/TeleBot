@@ -28,26 +28,32 @@ namespace TeleBot.API.Message
             FileId = fileId;
         }
 
+        [JsonProperty(PropertyName = "voice", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string FileId { get; set; }
+
+        [JsonProperty(PropertyName = "duration", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int Duration { get; set; } = 0;
+
+        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public bool DisableNotification { get; set; } = false;
+
+        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int ReplyToMessageId { get; set; } = 0;
+
+        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public IReplyMarkup ReplyMarkup { get; set; } = null;
+
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]
         public string ChatId { get; set; }
 
-        [JsonProperty(PropertyName = "voice", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "voice", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public InputFile File { get; set; }
-
-        [JsonProperty(PropertyName = "voice", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string FileId { get; set; }
-
-        [JsonProperty(PropertyName = "duration", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int Duration { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public bool DisableNotification { get; set; } = false;
-
-        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int ReplyToMessageId { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public IReplyMarkup ReplyMarkup { get; set; } = null;
 
         public string ApiMethod { get; } = "sendVoice";
 
@@ -56,7 +62,7 @@ namespace TeleBot.API.Message
             return new Dictionary<string, object>
             {
                 {"chat_id", ChatId},
-                {"voice", File ?? (object)FileId},
+                {"voice", File ?? (object) FileId},
                 {"duration", Duration},
                 {"disable_notification", DisableNotification},
                 {"reply_to_message_id", ReplyToMessageId},
@@ -65,4 +71,3 @@ namespace TeleBot.API.Message
         }
     }
 }
-

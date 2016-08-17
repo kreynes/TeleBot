@@ -1,8 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
-using TeleBot.API.Types;
+﻿using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Types.Inline
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InlineQueryResultVoice
@@ -19,16 +17,16 @@ namespace TeleBot
         [JsonProperty(PropertyName = "title", Required = Required.Always)]
         public string Title { get; set; }
 
-        [JsonProperty(PropertyName = "voice_duration", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "voice_duration", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public int Duration { get; set; }
 
-        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public InlineKeyboardMarkup ReplyMarkup { get; set; }
 
-        [JsonProperty(PropertyName = "input_message_content", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "input_message_content", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public object InputMessageContent { get; set; }
     }
 }
-
-
-

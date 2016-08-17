@@ -8,7 +8,7 @@ namespace TeleBot.API.Enums
     {
         Default,
         Markdown,
-        HTML
+        Html
     }
 }
 

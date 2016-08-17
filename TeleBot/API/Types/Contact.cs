@@ -18,4 +18,3 @@ namespace TeleBot.API.Types
         public int UserId { get; internal set; }
     }
 }
-

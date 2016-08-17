@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace TeleBot.API.Types
 {
@@ -12,4 +11,3 @@ namespace TeleBot.API.Types
         public string Status { get; internal set; }
     }
 }
-

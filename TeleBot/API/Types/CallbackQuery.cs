@@ -21,4 +21,3 @@ namespace TeleBot.API.Types
         public string Data { get; internal set; }
     }
 }
-

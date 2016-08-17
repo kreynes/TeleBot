@@ -15,4 +15,3 @@ namespace TeleBot.API.Types
         public bool RequestLocation { get; internal set; }
     }
 }
-

@@ -1,5 +1,4 @@
-﻿using System;
-namespace TeleBot
+﻿namespace TeleBot.API.Message
 {
     public interface IEditMessage
     {
@@ -9,4 +8,3 @@ namespace TeleBot
         string ApiMethod { get; }
     }
 }
-

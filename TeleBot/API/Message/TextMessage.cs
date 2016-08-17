@@ -24,20 +24,24 @@ namespace TeleBot.API.Message
         [JsonProperty(PropertyName = "text", Required = Required.Always)]
         public string Text { get; set; }
 
-        [JsonProperty(PropertyName = "parse_mode", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "parse_mode", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public ParseMode ParseMode { get; set; } = ParseMode.Default;
 
-        [JsonProperty(PropertyName = "disable_web_page_preview", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "disable_web_page_preview", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool DisableLinkPreview { get; set; } = false;
 
-        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool DisableNotification { get; set; } = false;
 
-        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public int ReplyToMessageId { get; set; } = 0;
 
-        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public IReplyMarkup ReplyMarkup { get; set; } = null;
     }
 }
-

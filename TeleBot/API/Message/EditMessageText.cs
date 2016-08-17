@@ -1,9 +1,9 @@
 ﻿using System;
+using Newtonsoft.Json;
 using TeleBot.API.Enums;
 using TeleBot.API.Types;
-using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class EditTextMessage : IEditMessage
@@ -20,28 +20,33 @@ namespace TeleBot
             Text = text;
         }
 
-        [JsonProperty(PropertyName = "chat_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string ChatId { get; set; } = "";
-
-        [JsonProperty(PropertyName = "message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int MessageId { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "inline_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string InlineMessageId { get; set; } = "";
-
         [JsonProperty(PropertyName = "text", Required = Required.Always)]
         public string Text { get; set; }
 
-        [JsonProperty(PropertyName = "parse_mode", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "parse_mode", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public ParseMode ParseMode { get; set; } = ParseMode.Default;
 
-        [JsonProperty(PropertyName = "disable_web_page_preview", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "disable_web_page_preview", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool DisableLinkPreview { get; set; } = false;
 
-        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public IReplyMarkup ReplyMarkup { get; set; } = null;
+
+        [JsonProperty(PropertyName = "chat_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string ChatId { get; set; } = "";
+
+        [JsonProperty(PropertyName = "message_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int MessageId { get; set; }
+
+        [JsonProperty(PropertyName = "inline_message_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string InlineMessageId { get; set; } = "";
 
         public string ApiMethod { get; } = "editMessageText";
     }
 }
-

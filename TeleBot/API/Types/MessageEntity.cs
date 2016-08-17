@@ -8,7 +8,7 @@ namespace TeleBot.API.Types
     public class MessageEntity
     {
         [JsonProperty(PropertyName = "type", Required = Required.Always)]
-        [JsonConverter(typeof(MessageEntityTypeJsonConverter))]
+        [JsonConverter(typeof (MessageEntityTypeJsonConverter))]
         public MessageEntityType Type { get; internal set; }
 
         [JsonProperty(PropertyName = "offset", Required = Required.Always)]
@@ -24,4 +24,3 @@ namespace TeleBot.API.Types
         public User User { get; internal set; }
     }
 }
-

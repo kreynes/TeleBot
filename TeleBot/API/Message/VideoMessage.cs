@@ -28,35 +28,44 @@ namespace TeleBot.API.Message
             FileId = fileId;
         }
 
+        [JsonProperty(PropertyName = "video", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string FileId { get; set; }
+
+        [JsonProperty(PropertyName = "duration", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int Duration { get; set; } = 0;
+
+        [JsonProperty(PropertyName = "width", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int Width { get; set; } = 0;
+
+        [JsonProperty(PropertyName = "height", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int Height { get; set; } = 0;
+
+        [JsonProperty(PropertyName = "caption", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public string Caption { get; set; } = "";
+
+        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public bool DisableNotification { get; set; } = false;
+
+        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public int ReplyToMessageId { get; set; } = 0;
+
+        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public IReplyMarkup ReplyMarkup { get; set; } = null;
+
         [JsonProperty(PropertyName = "chat_id", Required = Required.Always)]
         public string ChatId { get; set; }
 
-        [JsonProperty(PropertyName = "video", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "video", Required = Required.Default,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public InputFile File { get; set; }
-
-        [JsonProperty(PropertyName = "video", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string FileId { get; set; }
-
-        [JsonProperty(PropertyName = "duration", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int Duration { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "width", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int Width { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "height", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int Height { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "caption", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public string Caption { get; set; } = "";
-
-        [JsonProperty(PropertyName = "disable_notification", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public bool DisableNotification { get; set; } = false;
-
-        [JsonProperty(PropertyName = "reply_to_message_id", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public int ReplyToMessageId { get; set; } = 0;
-
-        [JsonProperty(PropertyName = "reply_markup", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public IReplyMarkup ReplyMarkup { get; set; } = null;
 
         public string ApiMethod { get; } = "sendVideo";
 
@@ -65,7 +74,7 @@ namespace TeleBot.API.Message
             return new Dictionary<string, object>
             {
                 {"chat_id", ChatId},
-                {"document", File ?? (object)FileId},
+                {"document", File ?? (object) FileId},
                 {"duration", Duration},
                 {"width", Width},
                 {"height", Height},
@@ -76,4 +85,3 @@ namespace TeleBot.API.Message
         }
     }
 }
-

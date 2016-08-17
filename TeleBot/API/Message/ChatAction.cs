@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace TeleBot
+namespace TeleBot.API.Message
 {
     public class ChatAction
     {

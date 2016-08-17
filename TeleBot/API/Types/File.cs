@@ -15,4 +15,3 @@ namespace TeleBot.API.Types
         public int Path { get; internal set; }
     }
 }
-
